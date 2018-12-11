@@ -15,3 +15,10 @@ require('foundation-sites');
 
 
 $(document).foundation();
+
+$(document).ready(function(){
+    $("#store").click(function(){
+        console.log("clicked");
+        window.location.href = 'shop.html';
+    });
+});

@@ -1,0 +1,10 @@
+#landing {
+    margin-top: 13vh;
+    div {
+        padding-bottom: 2vh;
+    }
+}
+
+.align-center {
+    @include flex-align($x: center);
+}

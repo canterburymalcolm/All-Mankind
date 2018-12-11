@@ -1,8 +1,14 @@
 @charset 'utf-8';
 
+@import 'global/typography';
+
 @import 'settings';
 @import 'foundation';
 @import 'motion-ui';
+
+@import 'components/navbar';
+@import 'components/landing';
+@import 'components/shop';
 
 // Global styles
 @include foundation-global-styles;
@@ -62,3 +68,5 @@
 // Motion UI
 @include motion-ui-transitions;
 @include motion-ui-animations;
+
+// My components
