@@ -1,0 +1,28 @@
+.text {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 36px;
+    @include breakpoint(small down) {
+        font-size: 18px; 
+    }
+    div {
+        p {
+            line-height: 35pt;
+            @include breakpoint(small down) {
+                line-height: 25pt;
+            }
+        }
+
+    }
+} 
+.instaLink {
+    font-size: 40px;
+    @include breakpoint(small down) {
+        font-size: 20px; 
+    }
+    color: Black;
+}
+
+.instaLink:hover {
+    color: red; 
+}

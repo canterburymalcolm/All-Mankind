@@ -1,11 +1,27 @@
+
+@mixin update-background($img){
+    background: url($img) no-repeat center center fixed;
+    -webkit-background-size:cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+$background-image: "../img/landingpage.png";
+
 .align-center {
     @include flex-align($x: center);
+}
+
+.align-spaced{
+    @include flex-align($x: spaced);
 }
 
 #landing-mobile {
     @include breakpoint(large) {
         display: none;
     }
+
     margin-top: 13vh;
     div {
         padding-bottom: 2vh;
@@ -16,46 +32,54 @@
     @include breakpoint(large down){
         display: none;
     }
-    
+
     width: 50%;
     height: 50%;
     position: absolute;
-    
+
     a {
         position: absolute;
         width: 21em;
         height: 20vh;
     }
-    
+
     a:hover {
-       cursor: pointer;
+        cursor: pointer;
     }
-    
+
     #store {
         bottom: 10em;
         right: -1em;
     }
-    
+
+    #store:hover {
+        @include update-background("../img/landingpage-store.png");
+    }
+
     #info {
         bottom: -9.5em;
         right: -3em;
         width: 20em;
     }
-    
+
+    #info:hover {
+        @include update-background("../img/landingpage-info.png");
+    }
+
     #blog {
         height: 19vh;
         width: 22em;
         bottom: 2em;
         right: -24em;
     }
+
+    #blog:hover {
+        @include update-background("../img/landingpage-blog.png");
+    }
 }
 
 @include breakpoint(large) {
-    html {
-        background: url(../img/landingpage.png) no-repeat center center fixed;
-        -webkit-background-size:cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+    .landing-background {
+        @include update-background("../img/landingpage.png");
     }
 }

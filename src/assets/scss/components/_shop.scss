@@ -1,9 +1,129 @@
+@mixin explode-snake(){
+    #storeSnake {
+        content: url("../img/snakeandbubble2.png");
+    }
+}
+
+$snake-image: "../img/snakeandbubble.png";
+
+body {
+    overflow: hidden;
+}
+
 .shop {
-    .product{
+    .menu {
+        @include breakpoint(large) {
+            display: none;
+        }
+        display: block;
+        position: relative;
+
+        img {
+            max-height: 300px;
+        }
+        a {
+            position: absolute;
+        }
+
+        #store {
+            width: 6.8em;
+            height: 3em;
+            top: 4.5em;
+            left: 2em;
+        }
+
+        #blog {
+            width: 6.2em;
+            height: 3em;
+            top: 4.5em;
+            left: 9.7em;
+        }
+
+        #info {
+            width: 6em;
+            height: 2.9em;
+            top: 8.7em;
+            left: 1.8em;
+        }
+
+        #contact {
+            width: 8.9em;
+            height: 3em;
+            top: 8.4em;
+            left: 8.3em;
+        }
+
+        #lookbook{
+            width: 11.2em;
+            height: 3.2em;
+            top: 12.5em;
+            left: 1.8em;
+        }
+
+        #x {
+            width: 2.5em;
+            height: 2.5em;
+            top: 12.8em;
+            left: 14.1em;
+        }
+    }
+
+    .product {
         text-align: center;
-        font-size: 20px;
-        margin-bottom: 50px;
-        span {
+        font-size: 17px;
+        margin: 50px;
+
+        @include breakpoint(medium) {
+            img {
+                margin: 0px 1vw 0 1vw;
+                width: 15vw;
+                height: 18vw;
+            }
         }
     }
 }
+
+.description {
+    margin-top: 10px;
+    display: inline-block;
+
+    .title {
+        margin-bottom: -2px;
+    }
+
+    .price {
+        font-size: 14px;
+    }
+}
+
+.background {
+    position: relative;
+
+    #storePig {
+        position: absolute;
+        bottom: -9vw;
+        width: 10vw;
+    }
+
+    #storeSnake {
+        position: absolute;
+        width: 85vw;
+        right: 0;
+        bottom: -9vw;
+    }
+
+    #linkSnake {
+        position: absolute;
+        width: 26vw;
+        height: 5vw;
+        bottom: -3vw;
+        left: 15vw;
+    }
+
+}
+
+
+
+
+
+
