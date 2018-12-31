@@ -23,10 +23,11 @@ $(document).ready(function(){
         window.location.href = 'shop.html';
     });
 
-    $("#sneakyLink").click(function(){
-        window.location.href = 'landing.html';
+    //click on header bubble to return to landing page
+    $("#title").click(function(){
+        window.location.href = '../landing.html';
     });
-    
+
     //hamburg menu opening animation
     $("#hamburg").click(function(){
         console.log("hamburger");
@@ -39,10 +40,59 @@ $(document).ready(function(){
         }
     });
 
+    //explode snake's text bubble on hover
     $("#linkSnake").hover(
         function() {
             $("#storeSnake").attr("src", "../assets/img/snakeandbubble2.png");
         }, function() {
             $("#storeSnake").attr("src", "../assets/img/snakeandbubble.png");
         });
+
+    //select the album image that was clicked
+    $(".nail").click(function() {
+        $(".nail").css("opacity", ".5");
+        $(this).css("opacity", "1");
+        $(".primary").attr("src", $(this).children('img').attr("src"));
+    });
+
+    //wait for all elements of product page to load before placing the teeth in the middle of the listing div and making them visible
+    $(window).on("load", function() {
+        $(".listing").each(function() {
+            var topRad = ($(this).height() / 2) - 10; 
+            var botRad = ($(this).height() / 2) - 65; 
+            var rad = ($(this).height() / 2) * .89;
+            $(this).find("#botImg").css("transform", "translateY(-"+ rad +"px)");
+            $(this).find("#topImg").css("transform", "translateY("+ rad +"px)");
+            $(this).find(".topMask").css("height", topRad);
+            $(this).find(".bottomMask").css("height", botRad);
+            $(this).find(".bottomTeeth, .topTeeth").css("display", "block");
+            $(this).find(".item").css("opacity", "1");
+        });    
+    });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

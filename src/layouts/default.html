@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
         <title>All Mankind</title>
         <link rel="icon" href="../assets/img/pighead.png">
         <link rel="stylesheet" href="{{root}}assets/css/app.css">
@@ -13,9 +13,52 @@
     </head>
     <body>
 
+        <div class="wrapper">
+            <div class="icons grid-x grid-margin-x align-center">
+                <div class="cell small-2">
+                    <img id="hamburg" src="../assets/img/ham1.png">
+                </div>
+                <div class="cell small-8 large-shrink">
+                    <img id="title" src="../assets/img/titleBubble.png">
+                </div>
+                <div class="cell small-2">
+                    <img id="cart" src="../assets/img/cartnobubble.png">
+                </div>
+            </div>
 
-        {{> body}}
+            <div class="grid-x grid-margin-x align-center">
+                <div class="menu cell small-10" style="display: none">
+                    <img src="../assets/img/linksbubble.png">
+                    <a id="store" href="{{root}}shop.html"></a>
+                    <a id="blog" href="shop.html"></a>
+                    <a id="info" href="shop.html"></a>
+                    <a id="contact" href="shop.html"></a>
+                    <a id="lookbook" href="shop.html"></a>
+                    <a id="x" href="#"></a>
+                </div>
+            </div>
 
+            <div class="navbar grid-x align-center">
+                <div class="cell large-shrink">
+                    <a id="navShop" href="shop.html">shop</a>
+                </div>
+                <div class="cell large-shrink">
+                    <a id="navInfo" href="#">info</a>
+                </div>
+                <div class="cell large-shrink">
+                    <a id="navBlog" href="#">blog</a>
+                </div>
+                <div class="cell large-shrink">
+                    <a id="navLook" href="#">lookbook</a>
+                </div>
+                <div class="cell large-shrink">
+                    <a id="navContact" href="#">contact</a>
+                </div>
+            </div>
+
+            {{> body}}
+
+        </div>
         <script src="../assets/js/app.js"></script>
     </body>
 </html>
