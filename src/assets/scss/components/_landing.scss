@@ -9,13 +9,6 @@
 
 $background-image: "../img/landingpage.png";
 
-.align-center {
-    @include flex-align($x: center);
-}
-
-.align-spaced{
-    @include flex-align($x: spaced);
-}
 
 #landing-mobile {
     @include breakpoint(large) {
@@ -29,7 +22,7 @@ $background-image: "../img/landingpage.png";
 }
 
 #landing-desktop {
-    @include breakpoint(large down){
+    @include breakpoint(medium down){
         display: none;
     }
 

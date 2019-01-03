@@ -2,6 +2,7 @@
     from {
         transform: scaleY(1);
     }
+
     to {
         transform: scaleY(0);
     }
@@ -11,6 +12,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -22,26 +24,36 @@
     }
 }
 
-$delay: .5s;
+$delay: 2s;
 
-.bottomTeeth, .topTeeth {
-    position: relative;
-    display: none;
+.small-teeth {
+    @include breakpoint(large) {
+        display: none;
+    }
 }
 
-.bottomMask, .topMask {
+.bottom-teeth, .top-teeth {
+    position: relative;
+}
+
+.large-bottom-mask, .large-top-mask, .small-bottom-mask, .small-top-mask {
     position: absolute;
     background-color: white;
     width: 100%;
     z-index: 1;
     bottom: 0vh;
-
     transform-origin: bottom;
-    animation:shrink ease 2s forwards;
+    animation: shrink ease 2s forwards;
     animation-delay: $delay;
 }
 
-#botImg, #topImg {
+.large-teeth {
+    @include breakpoint(medium down) {
+        display: none;
+    }
+}
+
+#large-bot-img, #large-top-img, #small-bot-img, #small-top-img {
     position: absolute;
     animation: move-up ease 2s forwards;
     animation-delay: $delay;
@@ -49,25 +61,33 @@ $delay: .5s;
 
 .listing {
     position: relative;
+    opacity: 0;
 
-    .topTeeth {
-        .topMask {
+    @include breakpoint(large) {
+        margin-bottom: 100px;
+    }
+
+
+    .top-teeth {
+        .small-top-mask {
             top: 30px;
             transform-origin: top;
         }
-        #topImg {
+
+        #small-top-img {
             z-index: 3;
             margin-top: 30px;
             transform-origin: bottom;
         }
     }
 
-    .bottomTeeth {
-        .bottomMask {
+    .bottom-teeth {
+        .small-bottomMask {
             bottom: 0vh;
             transform-origin: bottom;
         }
-        #botImg {
+
+        #small-bot-img {
             z-index: 2;
             margin-bottom: 20px;
             transform-origin: top;
@@ -78,8 +98,12 @@ $delay: .5s;
 .item {
     position: relative;
     z-index: 0;
-    margin: 120px 0 20px 0;
-    opacity: 0;
+    margin-top: 120px;
+
+    @include breakpoint(large) {
+        margin-top: 10vh;
+    }
+
 
     .primary {
         padding-bottom: 15px;
@@ -91,6 +115,14 @@ $delay: .5s;
             border-width: thin;
             width: 13vw;
             height: 13vw;
+            text-align: center;
+
+            @include breakpoint(large) {
+                width: 6vw;
+                height: 6vw;
+            }
+
+
             margin: 0 3px 0 3px;
             opacity: .5;
 
@@ -102,25 +134,86 @@ $delay: .5s;
 
             #mFront, #mBack {
                 padding: 2px 5px 2px 5px;
-            }
+                object-fit: contain;
 
+                @include breakpoint(large) {
+                    padding: 3px 0px 3px 0px;
+                }
+            }
         }
     }
+}
 
-    .description {
-        .info {
-            margin: 8px 0 0 15px;
-            font-size: 18px;
+.desc {
+    margin-bottom: 20px;
 
-            .price {
-                font-size: inherit;
-                margin-left: 10px;
+    @include breakpoint(large) {
+        margin-top: 13vw;
+    }
+
+
+    .desc-grid {
+        @include breakpoint(large) {
+            margin-left: 20px;
+        }
+
+        .top-teeth {
+            .large-top-mask {
+                top: 0;
+                transform-origin: top;
             }
 
+            #large-top-img {
+                z-index: 3;
+                margin-top: -6vw;
+                transform-origin: bottom;
+            }
         }
+
+        .bottom-teeth {
+            .large-bottomMask {
+                bottom: 0vh;
+                transform-origin: bottom;
+            }
+
+            #large-bot-img {
+                z-index: 2;
+                margin-bottom: 20px;
+                transform-origin: top;
+            }
+        }
+
+        .title {
+            margin: 15px 0 0 15px;
+            font-size: 18px;
+
+            @include breakpoint(large) {
+                margin: 20px 0px 0 20px;
+                font-size: 50px;
+                line-height: 98%;
+            }
+        }
+
+        .price {
+            font-size: 18px;
+            margin: 15px 0 0 10px;
+
+            @include breakpoint(large) {
+                font-size: 18px;
+                margin: 0 0 0 20px;
+            }
+        }
+
         .text {
             font-size: 14px;
             margin: 5px 0 0 15px;
+
+            @include breakpoint(large) {
+                font-size: 16px;
+                margin: 5px 0 0 20px;
+            }
+
+
             p {
                 line-height: 130%;
             }
@@ -129,29 +222,41 @@ $delay: .5s;
         .size {
             font-size: 17px;
             margin-left: 10px;
+            display: none;
+
             #small {
+                content: "small";
             }
         }
 
         .addItem {
+            display: none;
             font-size: 15px;
         }
     }
 }
 
+.select-buttons {
+    margin-top: 10px;
 
+    .select-size .button:hover {
+        background-color: gainsboro !important;
+    }
 
+    .select-num {
+        margin-left: 20px;
+    }
+}
 
+.add-button {
+    margin-top: 10px;
 
+    .button {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
+    .add-to-cart .button:hover {
+        background-color: gainsboro;
+    }
+}

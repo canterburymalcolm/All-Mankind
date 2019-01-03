@@ -3,8 +3,13 @@
     opacity: .5;
 }
 
-html, body { height: 100%};
+body {
+    overflow-x: hidden;
+}
 
+.fullHeight {
+    height: 100%;
+}
 
 .wrapper {
     position: relative;
@@ -19,4 +24,12 @@ a {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.align-center {
+    @include flex-align($x: center);
+}
+
+.align-spaced{
+    @include flex-align($x: spaced);
 }
