@@ -18,13 +18,23 @@
     }
 }
 
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 @keyframes move-up {
     to {
         transform: translateY(0);
     }
 }
 
-$delay: 2s;
+$delay: 1s;
 
 .small-teeth {
     @include breakpoint(large) {
@@ -111,7 +121,7 @@ $delay: 2s;
 
     .album {
         div {
-            border-style: solid;
+            //border-style: solid;
             border-width: thin;
             width: 13vw;
             height: 13vw;
@@ -156,6 +166,7 @@ $delay: 2s;
         @include breakpoint(large) {
             margin-left: 20px;
         }
+
 
         .top-teeth {
             .large-top-mask {
@@ -256,7 +267,9 @@ $delay: 2s;
         padding-right: 1em;
     }
 
-    .add-to-cart .button:hover {
-        background-color: gainsboro;
+    @include breakpoint(large) {
+        .add-to-cart .button:hover {
+            background-color: gainsboro;
+        }
     }
 }

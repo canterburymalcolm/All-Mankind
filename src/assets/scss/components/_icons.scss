@@ -5,7 +5,8 @@
     @include breakpoint(large) {
         padding-top: 30px;
     }
-    
+
+
     z-index: 4;
 
     div {
@@ -17,8 +18,33 @@
 
         #title {
             margin-top: -8px;
+
             @include breakpoint(large) {
                 max-width: 250px;
+            }
+        }
+
+        .cart-num {
+            display: none;
+            position: absolute;
+            border-style: solid;
+            border-color: rgb(44, 44, 44);
+            font-size: 11px;
+            line-height: 12px;
+            border-radius: 7px;
+            border-width: 1.5px;
+            padding: 1px 2px;
+            top: 6vw;
+            right: 13vw;
+
+            @include breakpoint(large) {
+                font-size: 12px;
+                line-height: 12px;
+                right: 60px;
+                top: 27px;
+                border-radius: 7px;
+                border-width: 2px;
+                padding: 1px 4px;
             }
         }
 
@@ -38,6 +64,7 @@
     img {
         max-height: 300px;
     }
+
     a {
         position: absolute;
     }
@@ -70,7 +97,7 @@
         left: 8.3em;
     }
 
-    #lookbook{
+    #lookbook {
         width: 11.2em;
         height: 3.2em;
         top: 12.5em;

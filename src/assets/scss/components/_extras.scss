@@ -1,0 +1,93 @@
+.extras {
+    .title {
+        text-align: center;
+        margin: 10px 0 20px 0;
+
+        h1 {
+            font-size: 30px;
+        }
+    }
+}
+
+.icon {
+    position: relative;
+    text-align: center;
+    margin: 20px 0 20px 0;
+
+    @include breakpoint(large) {
+        margin: 2vw 1vw 0 0vw;
+    }
+
+
+    .mobile {
+        @include breakpoint(large) {
+            display: none;
+        }
+
+
+        width: 40%;
+    }
+
+    .primary {
+        @include breakpoint(medium down) {
+            display: none;
+        }
+    }
+
+    .secondary {
+        display: none;
+    }
+
+    @include breakpoint(large) {
+        .question {
+            width: 80%;
+        }
+
+        .question-link {
+            position: absolute;
+            left: 5.8vw;
+            top: 0vw;
+            width: 16vw;
+            height: 31vw;
+            transform: rotate(-20deg);
+            border-radius: 5vw;
+        }
+
+        .calendar {
+            margin-top: 6vw;
+            width: 30vw;
+        }
+
+        .calendar-link {
+            position: absolute;
+            left: 1vw;
+            top: 5vw;
+            width: 23vw;
+            height: 22vw;
+            border-radius: 2vw;
+        }
+
+        .skate-link {
+            position: absolute;
+            left: 4vw;
+            top: -2vw;
+            width: 15vw;
+            height: 33vw;
+            transform: rotate(-41deg);
+            border-radius: 5vw;
+        }
+
+        .kanji {
+            margin: -1vw 0 0 1vw;
+        }
+
+        .kanji-link {
+            position: absolute;
+            left: 1vw;
+            top: 0vw;
+            width: 25vw;
+            height: 25vw;
+            border-radius: 2vw;
+        }
+    }
+}
