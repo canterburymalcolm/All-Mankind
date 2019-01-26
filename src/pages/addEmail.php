@@ -1,3 +1,0 @@
-<?php
-$servername= "localhost";
-?>

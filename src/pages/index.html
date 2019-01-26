@@ -4,7 +4,7 @@ layout: index-layout
 <div class="grid-container">
     <div class="grid-x grid-margin-x align-center">
         <div class="icons small-8 large-4 cell">
-            <img id="title" src="../assets/img/icons/titleBubble.png">
+            <img id="title" src="{{root}}assets/img/icons/titleBubble.png">
         </div>
     </div>
 
@@ -22,7 +22,11 @@ layout: index-layout
 
     <div class="text grid-x grid-margin-x align-center">
         <div class="cell small-10 large-8">
-            <p>but also leave your email below if you would like to subscribe to our newsletter:</p>
+            <p>but also leave your email below if you would like to subscribe to our newsletter:
+            </p>
+            <div>
+                <?php include '{{root}}assets/php/test.php'; ?>
+            </div>
         </div>
     </div>
 

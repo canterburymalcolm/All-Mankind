@@ -1,3 +1,19 @@
+@-webkit-keyframes shrink {
+    from {
+        transform: scaleY(1);
+    }
+
+    to {
+        transform: scaleY(0);
+    }
+}
+
+@-webkit-keyframes move-up {
+    to {
+        transform: translateY(0);
+    }
+}
+
 @keyframes shrink {
     from {
         transform: scaleY(1);
@@ -8,31 +24,12 @@
     }
 }
 
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
-
 @keyframes move-up {
     to {
         transform: translateY(0);
     }
 }
+
 
 $delay: 1s;
 
@@ -54,6 +51,7 @@ $delay: 1s;
     bottom: 0vh;
     transform-origin: bottom;
     animation: shrink ease 2s forwards;
+    -webkit-animation: shrink ease 2s forwards;
     animation-delay: $delay;
 }
 
@@ -66,6 +64,7 @@ $delay: 1s;
 #large-bot-img, #large-top-img, #small-bot-img, #small-top-img {
     position: absolute;
     animation: move-up ease 2s forwards;
+    -webkit-animation: move-up ease 2s forwards;
     animation-delay: $delay;
 }
 
@@ -92,7 +91,7 @@ $delay: 1s;
     }
 
     .bottom-teeth {
-        .small-bottomMask {
+        .small-bottom-mask {
             bottom: 0vh;
             transform-origin: bottom;
         }
@@ -131,7 +130,6 @@ $delay: 1s;
                 width: 6vw;
                 height: 6vw;
             }
-
 
             margin: 0 3px 0 3px;
             opacity: .5;
@@ -182,8 +180,7 @@ $delay: 1s;
         }
 
         .bottom-teeth {
-            .large-bottomMask {
-                bottom: 0vh;
+            .large-bottom-mask {
                 transform-origin: bottom;
             }
 

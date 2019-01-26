@@ -7,9 +7,6 @@
     background-size: cover;
 }
 
-$background-image: "../img/landing/landingpage.png";
-
-
 #landing-mobile {
     @include breakpoint(large) {
         display: none;
@@ -46,7 +43,7 @@ $background-image: "../img/landing/landingpage.png";
     }
 
     #store:hover {
-        @include update-background("../img/landing/landingpage-store.png");
+        @include update-background("../img/landing/landing-store.png");
     }
 
     #info {
@@ -56,7 +53,7 @@ $background-image: "../img/landing/landingpage.png";
     }
 
     #info:hover {
-        @include update-background("../img/landing/landingpage-info.png");
+        @include update-background("../img/landing/landing-info.png");
     }
 
     #extras {
@@ -67,12 +64,12 @@ $background-image: "../img/landing/landingpage.png";
     }
 
     #extras:hover {
-        @include update-background("../img/landing/landingpage-blog.png");
+        @include update-background("../img/landing/landing-extras.png");
     }
 }
 
 @include breakpoint(large) {
     .landing-background {
-        @include update-background("../img/landing/landingpage.png");
+        @include update-background("../img/landing/landing-page.png");
     }
 }

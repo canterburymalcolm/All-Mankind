@@ -65,7 +65,7 @@
     width: 100%;
     bottom: 0;
 
-    #storePig {
+    #store-pig {
         position: absolute;
         width: 10vw;
         height: auto;
@@ -73,16 +73,18 @@
         left: 0;
     }
 
-    #storeSnake {
+    #snake-primary, #snake-secondary {
         position: absolute;
         width: 85vw;
         height: auto;
         bottom: 0;
         right: 0;
+        transition: opacity .1s ease-in-out;
     }
 
-    #linkSnake {
+    #link-snake {
         position: absolute;
+        z-index: 1;
         width: 25vw;
         height: 5vw;
         bottom: 6vw;
@@ -92,5 +94,9 @@
             left: 15vw;
             width: 26vw;
         }
+    }
+
+    #link-snake:hover ~ #snake-primary{
+        opacity: 0;
     }
 }

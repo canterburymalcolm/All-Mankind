@@ -1,0 +1,2 @@
+#PHP able to run in .html
+AddType application/x-httpd-php .php .htm .html

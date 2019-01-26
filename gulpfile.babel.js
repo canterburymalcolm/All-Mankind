@@ -1,19 +1,19 @@
 'use strict';
 
-import plugins       from 'gulp-load-plugins';
-import yargs         from 'yargs';
-import browser       from 'browser-sync';
-import gulp          from 'gulp';
-import panini        from 'panini';
-import rimraf        from 'rimraf';
-import sherpa        from 'style-sherpa';
-import yaml          from 'js-yaml';
-import fs            from 'fs';
+import plugins from 'gulp-load-plugins';
+import yargs from 'yargs';
+import browser from 'browser-sync';
+import gulp from 'gulp';
+import panini from 'panini';
+import rimraf from 'rimraf';
+import sherpa from 'style-sherpa';
+import yaml from 'js-yaml';
+import fs from 'fs';
 import webpackStream from 'webpack-stream';
-import webpack2      from 'webpack';
-import named         from 'vinyl-named';
-import uncss         from 'uncss';
-import autoprefixer  from 'autoprefixer';
+import webpack2 from 'webpack';
+import named from 'vinyl-named';
+import uncss from 'uncss';
+import autoprefixer from 'autoprefixer';
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -32,7 +32,7 @@ function loadConfig() {
 // Build the "dist" folder by running all of the below tasks
 // Sass must be run later so UnCSS can search for used classes in the others assets.
 gulp.task('build',
- gulp.series(clean, gulp.parallel(pages, javascript, images, copy), sass, styleGuide));
+  gulp.series(clean, gulp.parallel(pages, javascript, images, copy), sass, styleGuide));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -47,13 +47,15 @@ function clean(done) {
 // Copy files out of the assets folder
 // This task skips over the "img", "js", and "scss" folders, which are parsed separately
 function copy() {
+  gulp.src('src/.htaccess')
+    .pipe(gulp.dest('dist/'))
   return gulp.src(PATHS.assets)
     .pipe(gulp.dest(PATHS.dist + '/assets'));
 }
 
 // Copy page templates into finished HTML files
 function pages() {
-  return gulp.src('src/pages/**/*.{html,hbs,handlebars}')
+  return gulp.src('src/pages/**/*.{php,html,hbs,handlebars}')
     .pipe(panini({
       root: 'src/pages/',
       layouts: 'src/layouts/',
@@ -112,7 +114,7 @@ let webpackConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [ "@babel/preset-env" ],
+            presets: ["@babel/preset-env"],
             compact: false
           }
         }
@@ -133,7 +135,7 @@ function javascript() {
       .on('error', e => { console.log(e); })
     ))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
-    .pipe(gulp.dest(PATHS.dist + '/assets/js'));
+    .pipe(gulp.dest('dist/assets/js'));
 }
 
 // Copy images to the "dist" folder
@@ -143,14 +145,16 @@ function images() {
     .pipe($.if(PRODUCTION, $.imagemin([
       $.imagemin.jpegtran({ progressive: true }),
     ])))
-    .pipe(gulp.dest(PATHS.dist + '/assets/img'));
+    .pipe(gulp.dest('dist/assets/img'));
 }
 
 // Start a server with BrowserSync to preview the site in
 function server(done) {
   browser.init({
-    server: PATHS.dist, port: PORT
-  }, done);
+    //server: PATHS.dist, port: PORT
+    proxy: "http://localhost/All_Mankind/dist/"  
+  }); 
+  done();
 }
 
 // Reload the browser with BrowserSync
@@ -163,6 +167,7 @@ function reload(done) {
 function watch() {
   gulp.watch(PATHS.assets, copy);
   gulp.watch('src/pages/**/*.html').on('all', gulp.series(pages, browser.reload));
+  gulp.watch('src/pages/**/*.php').on('all', gulp.series(pages, browser.reload));
   gulp.watch('src/{layouts,partials}/**/*.html').on('all', gulp.series(resetPages, pages, browser.reload));
   gulp.watch('src/data/**/*.{js,json,yml}').on('all', gulp.series(resetPages, pages, browser.reload));
   gulp.watch('src/helpers/**/*.js').on('all', gulp.series(resetPages, pages, browser.reload));

@@ -16,12 +16,44 @@ var curItem = new Item("", "", "", 1);
 var numItems = 0;
 var cart = [];
 
-function Item(name, size, color, quanity) {
+function Item(name, size, color, quanity, price, total) {
     this.name = name;
     this.size = size;
     this.color = color;
     this.quanity = quanity;
+    this.price = price;
+    this.total = total;
+
 }
+
+Item.prototype.sameItem = function (other) {
+    return (this.name == other.name)
+        && (this.size == other.size)
+        && (this.color == other.color);
+}
+
+function addItem(name, price) {
+    curItem.name = name;
+    curItem.price = price;
+    curItem.total = curItem.quanity * curItem.price;
+    numItems += curItem.quanity;
+    var clone = $.extend(true, {}, curItem);
+    //only add item to cart if the same item has not already
+    //been added otherwise just increase quantity of existing item
+    var found = false;
+    cart.forEach(item => {
+        if (clone.sameItem(item) && !found) {
+            item.quanity += clone.quanity;
+            item.total += clone.total;
+            found = true;
+        }
+    });
+    if (!found) {
+        cart.push(clone);
+    }
+    saveCart();
+}
+
 
 function saveCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -46,7 +78,6 @@ function updateCart() {
     $(".cart-num").css("display", "inline");
 }
 
-
 $(document).foundation();
 
 $(document).ready(function () {
@@ -65,7 +96,12 @@ $(document).ready(function () {
 
     //click on header bubble to return to landing page
     $("#title").click(function () {
-        window.location.href = '../landing.html';
+        window.location.href = 'landing.html';
+    });
+
+    //click on header bubble to return to landing page
+    $("#cart").click(function () {
+        window.location.href = 'checkout.html';
     });
 
     //hamburg menu opening animation
@@ -120,11 +156,7 @@ $(document).ready(function () {
         if (curItem.size != "") {
             switch ($(this).attr("id")) {
                 case "the-malcolm-atc":
-                    curItem.name = "THE MALCOLM";
-                    numItems += curItem.quanity;
-                    var clone = $.extend(true, {}, curItem);
-                    cart.push(clone);
-                    saveCart();
+                    addItem("THE MALCOLM", 40);
                     break;
             }
         }
@@ -181,9 +213,125 @@ $(window).on("load", function () {
     });
 });
 
+if ($('body').is('.checkout-body')) {
+    console.log("on checkout");
+
+    //Store
+    function getOrderTotal() {
+        loadCart();
+        var total = 0;
+        cart.forEach(item => {
+            total += item.total;
+        });
+        return total;
+    }
+
+    //checkout
 
 
+    const form = $("#payment-form")
+    const submitButton = form.children("button");
 
+    //Stripe client with test key
+    const stripe = Stripe('pk_test_3oUad6Xkn77ClYtyKHzDMljn');
+
+    //Instance of Elements
+    const elements = stripe.elements();
+
+    //style for our Elements
+    const style = {
+        base: {
+            iconColor: '#666ee8',
+            color: '#31325f',
+            fontWeight: 400,
+            fontFamily:
+                '"Pragati Narrow", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '15px',
+            '::placeholder': {
+                color: '#aab7c4',
+            },
+            ':-webkit-autofill': {
+                color: '#666ee8',
+            },
+        },
+    };
+
+    //Card Element
+    const card = elements.create('card', { style });
+
+    //Mount Card Element on page
+    card.mount('#card-element');
+
+    //TODO: watch Card Element to display errors
+
+    //create payment request
+    const paymentRequest = stripe.paymentRequest({
+        country: 'US',
+        currency: 'usd',
+        total: {
+            label: 'Total',
+            amount: getOrderTotal(),
+        },
+        requestShipping: true,
+        requestPayerEmail: true,
+        shippingOptions: [
+            {
+                id: 'free',
+                label: 'Free Shipping',
+                detail: 'Delivery within 5 days',
+                amount: 0,
+            },
+        ],
+    });
+
+    //TODO: callbacks on creation of a Source and change of shipping address
+
+    //Create the Payment request Button
+    const paymentRequestButton = elements.create('paymentRequestButton', {
+        paymentRequest,
+    });
+
+    //TODO: only mount if payment request is available
+
+    //mount paymentRequest
+    const paymentRequestSupport = paymentRequest.canMakePayment();
+    if (paymentRequestSupport) {
+        //paymentRequestButton.mount('#payment-request-button');
+    }
+
+    //handle form submission
+
+    //listen to changes in the country selection
+    form
+        .querySelector('select[name=country')
+        .addEventListener('change', event => {
+            event.preventDefault();
+            //TODO: add functionality to display
+            //      country specific payment information
+            //selectCountry(event.target.value);
+        });
+
+
+    //handle submission of payment form
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+
+        //Retrieve user information
+        const payment = form.querySelector('input[name=payment]:checked').value;
+        const name = form.querySelector('input[name=name]').value;
+        const country = form.querySelector('select[name=country] option:checked').value;
+        const email = form.querySelector('input[name=email]').value;
+        const shipping = {
+            name,
+            address: {
+                line
+            }
+        }
+    });
+
+
+}
 
 
 

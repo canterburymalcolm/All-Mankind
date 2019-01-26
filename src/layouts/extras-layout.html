@@ -8,7 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
     <title>All Mankind</title>
-    <link rel="icon" href="../assets/img/icons/pighead.png">
+    <link rel="icon" href="{{root}}assets/img/icons/pighead.png">
     <link rel="stylesheet" href="{{root}}assets/css/app.css">
     <link href="https://fonts.googleapis.com/css?family=Muli:700|Pragati+Narrow:700" rel="stylesheet">
 </head>
@@ -18,19 +18,19 @@
     <div class="wrapper">
         <div class="icons grid-x grid-margin-x align-center">
             <div class="cell small-2">
-                <img id="hamburg" src="../assets/img/icons/ham1.png">
+                <img id="hamburg" src="{{root}}assets/img/icons/ham1.png">
             </div>
             <div class="cell small-8 large-shrink">
-                <img id="title" src="../assets/img/icons/titleBubble.png">
+                <img id="title" src="{{root}}assets/img/icons/titleBubble.png">
             </div>
             <div class="cell small-2">
-                <img id="cart" src="../assets/img/icons/cartnobubble.png">
+                <img id="cart" src="{{root}}assets/img/icons/cartnobubble.png">
             </div>
         </div>
 
         <div class="grid-x grid-margin-x align-center">
             <div class="menu cell small-10" style="display: none">
-                <img src="../assets/img/icons/linksbubble.png">
+                <img src="{{root}}assets/img/icons/linksbubble.png">
                 <a id="store" href="{{root}}shop.html"></a>
                 <a id="extras" href="{{root}}extras.html"></a>
                 <a id="info" href="shop.html"></a>
@@ -59,9 +59,10 @@
         </div>
 
         {{> body}}
-        
+
     </div>
-    <script src="../assets/js/app.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{root}}assets/js/app.js"></script>
 </body>
 
 </html>
