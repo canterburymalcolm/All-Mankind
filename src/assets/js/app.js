@@ -392,6 +392,8 @@ $(document).ready(function () {
             key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
             image: 'assets/img/icons/boyHead.png',
             locale: 'auto',
+            billingAddress: true,
+            shippingAddress: true,
             token: function (token) {
                 $.ajax({
                     method: "POST",

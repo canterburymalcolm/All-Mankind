@@ -1,49 +1,26 @@
 ---
-layout: index-layout 
+layout: landing-background
 ---
-<div class="grid-container">
-    <div class="grid-x grid-margin-x align-center">
-        <div class="icons small-8 large-4 cell">
-            <img id="title" src="{{root}}assets/img/icons/titleBubble.png">
-        </div>
+<div id="landing-mobile" class="grid-x grid-padding-x align-center">
+    <div class="cell small-9">
+        <a href="{{root}}store.html">
+            <img id="store" src="{{root}}assets/img/landing/bubble-store.png">
+        </a>
     </div>
-
-    <div class="text grid-x grid-margin-x align-center">
-        <div class="cell small-10 large-8">
-            <p>This site is currently under construction, but our instagram ain't so visit it right now sexyboi:</p>
-        </div>
+    <div class="cell small-9">
+        <a href="{{root}}extras.html">
+            <img id="extras" src="{{root}}assets/img/landing/bubble-extras.png">
+        </a>
     </div>
-
-    <div class="grid-x grid-margin-x align-center">
-        <div class="cell small-8 large-4">
-            <a class="instaLink" href="https://www.instagram.com/allmankindisstupid/"><strong>@allmankindisstupid</strong></a>
-        </div>
+    <div class="cell small-9">
+        <a href="{{root}}info.html">
+            <img id="info" src="{{root}}assets/img/landing/bubble-info.png">
+        </a>
     </div>
-
-    <div class="text grid-x grid-margin-x align-center">
-        <div class="cell small-10 large-8">
-            <p>but also leave your email below if you would like to subscribe to our newsletter:
-            </p>
-            <div>
-                <?php include '{{root}}assets/php/test.php'; ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="grid-x grid-margin-x align-center">
-        <div class="cell small-10 large-8">
-            <form>
-                <div class="grid-container">
-                    <div class="grid-x grid-padding-x">
-                        <div class="large-11 cell input-group">
-                            <input class="input-group-field" type="text">
-                            <input class="input-group-button" type="submit" value="Subscribe">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
 </div>
 
+<div id="landing-desktop">
+    <a id="store" href="{{root}}store.html"></a>
+    <a id="info" href="{{root}}info.html"></a>
+    <a id="extras" href="{{root}}extras.html"></a>
+</div>
