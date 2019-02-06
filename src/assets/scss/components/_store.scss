@@ -1,0 +1,111 @@
+.store {
+    margin-top: 25px;
+    padding-bottom: 8vw;
+
+    .product {
+        position: relative;
+        text-align: center;
+        font-size: 17px;
+        margin: 25px 50px 25px 50px;
+
+        .store-image {
+            position: relative;
+
+            @include breakpoint(large) {
+                width: 15vw;
+                height: 18vw;
+                margin: 0px 1vw 0 1vw;
+            }
+
+            img {
+                @include breakpoint(large) {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    object-fit: contain;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+ 
+            .secondary {
+                position: absolute;
+                background-color: white;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                transition: opacity 0.2s ease-in-out;
+            }
+       }
+
+        #fishheads {
+            @include breakpoint(large) {
+                width: 11vw;
+            }
+        }
+
+        @include breakpoint(large) {
+            .store-image:hover {
+                .secondary {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.description {
+    margin-top: 10px;
+    display: inline-block;
+
+    .title {
+        margin-bottom: -2px;
+    }
+
+    .price {
+        font-size: 14px;
+    }
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+
+    #store-pig {
+        position: absolute;
+        width: 10vw;
+        height: auto;
+        bottom: 0;
+        left: 0;
+    }
+
+    #snake-primary, #snake-secondary {
+        position: absolute;
+        z-index: -1;
+        width: 85vw;
+        height: auto;
+        bottom: 0;
+        right: 0;
+        transition: opacity .1s ease-in-out;
+    }
+
+    #link-snake {
+        position: absolute;
+        z-index: 1;
+        width: 25vw;
+        height: 5vw;
+        bottom: 6vw;
+        left: 14vw;
+
+        @include breakpoint(large) {
+            left: 15vw;
+            width: 26vw;
+        }
+    }
+
+    #link-snake:hover ~ #snake-primary {
+        opacity: 0;
+    }
+}

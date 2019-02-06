@@ -30,8 +30,19 @@
     }
 }
 
+$delay: 0.3s;
 
-$delay: 1s;
+.animate-mask {
+    animation: shrink ease 2s forwards;
+    -webkit-animation: shrink ease 2s forwards;
+    animation-delay: $delay;
+}
+
+.animate-teeth {
+    animation: move-up ease 2s forwards;
+    -webkit-animation: move-up ease 2s forwards;
+    animation-delay: $delay;
+}
 
 .small-teeth {
     @include breakpoint(large) {
@@ -50,9 +61,6 @@ $delay: 1s;
     z-index: 1;
     bottom: 0vh;
     transform-origin: bottom;
-    animation: shrink ease 2s forwards;
-    -webkit-animation: shrink ease 2s forwards;
-    animation-delay: $delay;
 }
 
 .large-teeth {
@@ -63,9 +71,6 @@ $delay: 1s;
 
 #large-bot-img, #large-top-img, #small-bot-img, #small-top-img {
     position: absolute;
-    animation: move-up ease 2s forwards;
-    -webkit-animation: move-up ease 2s forwards;
-    animation-delay: $delay;
 }
 
 .listing {
@@ -130,6 +135,7 @@ $delay: 1s;
                 width: 6vw;
                 height: 6vw;
             }
+
 
             margin: 0 3px 0 3px;
             opacity: .5;
@@ -264,8 +270,16 @@ $delay: 1s;
         padding-right: 1em;
     }
 
-    @include breakpoint(large) {
-        .add-to-cart .button:hover {
+    .go-to-cart {
+        display: none; 
+        padding-left: 5vw;
+        @include breakpoint(large) {
+            padding-left: 2vw;
+        }
+    }
+
+    .add-to-cart .button:hover {
+        @include breakpoint(large) {
             background-color: gainsboro;
         }
     }

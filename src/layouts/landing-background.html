@@ -2,21 +2,24 @@
 
 <!doctype html>
 <html class="no-js landing-background" lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
-        <title>All Mankind</title>
-        <link rel="icon" href="{{root}}assets/img/icons/pighead.png">
-        <link rel="stylesheet" href="{{root}}assets/css/app.css">
-        <link href="https://fonts.googleapis.com/css?family=Muli:700|Pragati+Narrow:700" rel="stylesheet">
-    </head>
-    <body>
-       
 
-        {{> body}}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
+    <title>All Mankind</title>
+    <link rel="icon" href="{{root}}assets/img/icons/pigHead.png">
+    <link rel="stylesheet" href="{{root}}assets/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:700|Pragati+Narrow:700" rel="stylesheet">
+</head>
 
-        <script src="https://js.stripe.com/v3/"></script>
-        <script src="{{root}}assets/js/app.js"></script>
-    </body>
+<body>
+
+
+    {{> body}}
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="{{root}}assets/js/app.js"></script>
+</body>
+
 </html>

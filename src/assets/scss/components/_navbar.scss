@@ -2,17 +2,25 @@
     @include breakpoint(medium) {
         margin: 1em 0px 0em 0px;
     }
+
+
     font-size: 24px;
     text-align: center;
-    div {
 
-        @include breakpoint(medium down){
+    div {
+        @include breakpoint(medium down) {
             display: none;
         }
-        
+
+
         padding: 0px 10px 0px 10px;
     }
+
     a {
         color: black;
+    }
+
+    a:hover {
+        color: #ed1c24;
     }
 }

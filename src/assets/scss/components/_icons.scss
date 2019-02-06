@@ -10,17 +10,23 @@
     z-index: 4;
 
     div {
-        #hamburg {
+        #hamburger-open, #hamburger-closed  {
             @include breakpoint(large) {
                 display: none;
             }
         }
 
-        #title {
-            margin-top: -8px;
+        #hamburger-open {
+            display: none;
+        }
 
-            @include breakpoint(large) {
-                max-width: 250px;
+        #title {
+            img {
+                margin-top: -8px;
+
+                @include breakpoint(large) {
+                    max-width: 250px;
+                }
             }
         }
 
@@ -49,6 +55,7 @@
         }
 
         #cart {
+            z-index: -1;
             @include breakpoint(large) {
                 max-width: 50px;
                 position: absolute;
@@ -58,7 +65,7 @@
     }
 }
 
-.menu {
+.hamburger {
     position: relative;
 
     img {
@@ -104,7 +111,7 @@
         left: 1.8em;
     }
 
-    #x {
+    #exit {
         width: 2.5em;
         height: 2.5em;
         top: 12.8em;
