@@ -12,6 +12,7 @@ require('foundation-sites');
 // If you want to pick and choose which modules to include, comment out the above and uncomment
 // the line below
 //import './lib/foundation-explicit-pieces';
+//require('./lib/zoom-master/jquery.zoom');
 var curItem = new Item("", "medium", "", 1);
 var numItems = 0;
 var cart = [];
@@ -54,6 +55,21 @@ function addItem(name, price) {
     saveCart();
 }
 
+function describeCart() {
+    var desc = "";
+    cart.forEach(item => {
+        desc += item.name + ' ' + '(';
+        if (item.color != "") {
+            desc += item.color + ' - ';
+        }
+        desc += item.size + ')';
+        if (item.quantity > 1) {
+            desc += ' x ' + item.quantity;
+        }
+        desc += '\n';
+    })
+    return desc;
+}
 
 function saveCart() {
     cart.forEach(item => {
@@ -74,7 +90,9 @@ function loadCart() {
         });
         updateCart();
         placeCart();
+        placeOrder();
     }
+    console.log(describeCart());
 }
 
 function updateCart() {
@@ -162,6 +180,73 @@ function placeCart() {
     calculateSubtotal();
 }
 
+function placeOrder() {
+    //place html for each item in order
+    if ($(".order").length > 0) {
+        console.log("placing order");
+        for (var i = 0; i < cart.length; i++) {
+            var item = cart[i];
+            var page = "#";
+            var image;
+            if (item.name === "THE MALCOLM") {
+                page = "the-malcolm.html";
+                image = "mBack.png";
+            } else if (item.name === "THE JOHN") {
+                page = "the-john.html";
+                image = "johnBack.png";
+            } else if (item.name === "FISH HEADS") {
+                page = "fish-heads.html";
+                image = "fishFront.png";
+            } else if (item.name === "THUMB UP") {
+                page = "thumb-up.html";
+                if (item.color === "blue") {
+                    image = "thumbBlueBack.png";
+                } else {
+                    image = "thumbPinkBack.png";
+                }
+            }
+            var member =
+                '<div class="cell grid-x grid-margin-x align-center">' +
+                '<div class="cell small-7 large-3">' +
+                '<div class="order-member grid-x grid-margin-x">' +
+                '<div class="order-member-img cell small-4 large-3">' +
+                '<a href="products/' + page + '">' +
+                '<img src="assets/img/cart/' + image + '">' +
+                '</a>' +
+                '</div>' +
+                '<div class="order-member-info cell small-6 large-7">' +
+                '<div class="order-member-name">' +
+                '<span>' + item.name + '</span>' +
+                '</div>' +
+                '<div class="order-member-menus">' +
+                '<ul class="dropdown-menu">';
+
+            if (item.name != "FISH HEADS") {
+                member +=
+                    '<li class="size-0">' +
+                    '<span>' + item.size.toUpperCase() + '</span>' +
+                    '</li>';
+            }
+            member +=
+                '<li class="quantity-num">' +
+                '<span>QUANTITY: ' + item.quantity + '</span>' +
+                '</li>' +
+                '</ul>' +
+                '</div>' +
+                '</div>' +
+                '<div class="order-member-price cell small-2 large-2">' +
+                '<span>$' + item.price + '</span>' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+
+            $(".order").append(member);
+        }
+    }
+    calculateSubtotal();
+}
+
 function calculateSubtotal() {
     var subtotal = 0;
     for (var i = 0; i < cart.length; i++) {
@@ -233,6 +318,15 @@ $(document).ready(function () {
         $(this).css("opacity", "1");
         $(".primary").attr("src", $(this).children('img').attr("src"));
     });
+
+    //zoom into images on hover
+    // $(".item-image").hover(function () {
+    //     $(this).zoom({
+    //         url: $(".primary").attr("src"),
+    //         magnify: 1.5
+    //     });
+    // });
+
 
     //link from store to individual product pages
     $(".product").click(function () {
@@ -328,7 +422,6 @@ $(document).ready(function () {
 
     //CART
 
-    console.log('hello');
     //update dropdown menu values
     $(".cart").find(".size-0, .quantity-num").click(function () {
         console.log('dropdown');
@@ -338,7 +431,6 @@ $(document).ready(function () {
             $(this).find(".sub-menu").css("display", "none");
         }
     })
-
 
     //update size of item in cart
     $(".size-1, .size-2, .size-3").click(function () {
@@ -389,11 +481,14 @@ $(document).ready(function () {
     //add checkout card to purchase
     if ($(".cart").length > 0) {
         var handler = StripeCheckout.configure({
-            key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
+            //key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
+            key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
             image: 'assets/img/icons/boyHead.png',
+            description: describeCart(),
             locale: 'auto',
             billingAddress: true,
             shippingAddress: true,
+            zipCode: true,
             token: function (token) {
                 $.ajax({
                     method: "POST",
@@ -402,10 +497,13 @@ $(document).ready(function () {
                     {
                         stripeToken: token.id,
                         amount: (calculateSubtotal() * 100).toString(),
+                        description: describeCart(),
+                        email: token.email,
                         cart: JSON.stringify(cart)
                     }
                 }).done(function (result) {
-                    alert("Data Saved: " + result);
+                    saveCart();
+                    window.location.href = "confirmation.html";
                 })
             }
         });
@@ -435,6 +533,27 @@ $(document).ready(function () {
     //     'data-locale="auto" data-shipping-address="true" data-billing-address="true" data-zip-code="true">' +
     //     '</script>' +
     //     '</form>');
+
+    //Confirmation
+
+    //Clear cart when user leaves the confirmation page
+    if ($(".confirm").length > 0) {
+        $("#title, #cart, #store, #extras, #contact, #info, #lookbook, #navStore, #navExtras, "
+        + "#navInfo, #navLook, #navContact, #order-button").click(function () {
+            cart = [];
+            saveCart();
+        });
+    }
+
+    //fill in subtotal and total values
+    $("#order-subtotal").text("$" + calculateSubtotal());
+    $("#order-total-val").text("$" + (calculateSubtotal() + 5));
+
+    //link order-button to store page
+    $("#order-button").click( ()=> {
+        window.location.href = "store.html";
+    });
+
 });
 
 //wait for all elements of product page to load before 

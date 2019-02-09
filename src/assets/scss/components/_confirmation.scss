@@ -1,0 +1,142 @@
+.confirm {
+    .order-before, .order-after {
+        padding-top: 40px;
+
+        @include breakpoint(large) {
+            padding-top: 20px;
+        }
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-size: 28px;
+
+        @include breakpoint(large) {
+            font-size: 3vw;
+        }
+    }
+
+    h2 {
+        font-size: 24px;
+        line-height: 110%;
+
+        @include breakpoint(large) {
+            font-size: 2.3vw;
+        }
+    }
+
+    p {
+        font-size: 20px;
+        line-height: 120%;
+
+        @include breakpoint(large) {
+            font-size: 25px;
+        }
+    }
+}
+
+.order {
+    padding-top: 10px;
+}
+
+.order-member {
+    padding-bottom: 20px;
+
+    @include breakpoint(large) {
+        padding-top: 10px;
+    }
+
+
+    .order-member-img {
+        position: relative;
+
+        img {
+            position: absolute;
+            bottom: 0;
+
+            @include breakpoint(large) {
+                right: 0;
+                max-width: 5vw;
+            }
+        }
+    }
+
+    .order-member-info {
+        padding-top: 10px;
+
+        .order-member-name {
+            font-size: 4.7vw;
+
+            @include breakpoint(large) {
+                font-size: 1.5vw;
+            }
+        }
+
+        .order-member-menus {
+            font-size: 2.8vw;
+
+            @include breakpoint(large) {
+                font-size: .7vw;
+            }
+        }
+    }
+
+    .order-member-price {
+        font-size: 18px;
+        padding-top: 30px;
+
+        @include breakpoint(large) {
+            padding-top: 20px;
+        }
+
+
+        span {
+            @include breakpoint(large) {
+                float: right;
+            }
+        }
+    }
+}
+
+.order-member-menus {
+    float: right;
+    width: 100%;
+    padding-bottom: 3px;
+
+    .dropdown-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            float: left;
+            position: relative;
+        }
+
+        .size-0 {
+            padding-right: 15px;
+        }
+    }
+}
+
+.order-summary {
+    #order-total-tag, #order-total-val {
+        font-size: 24px;
+    }
+
+    #order-subtotal, #order-shipping, #order-total-val {
+        float: right;
+    }
+}
+
+#order-button {
+    padding-top: 20px;
+
+    button {
+        border-style: solid;
+        border-color: black;
+        border-width: 1.5px;
+        height: 38px;
+        font-size: 17px;
+    }
+}
