@@ -481,7 +481,6 @@ $(document).ready(function () {
     //add checkout card to purchase
     if ($(".cart").length > 0) {
         var handler = StripeCheckout.configure({
-            //key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
             key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
             image: 'assets/img/icons/boyHead.png',
             description: describeCart(),

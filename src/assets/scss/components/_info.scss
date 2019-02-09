@@ -1,0 +1,205 @@
+.info-intro {
+    padding-top: 40px;
+
+    h1 {
+        font-size: 20px;
+        line-height: 60%;
+
+        @include breakpoint(large) {
+            display: none;
+        }
+    }
+
+    h3 {
+        text-align: center;
+        font-size: 3.5vw;
+
+        @include breakpoint(medium down) {
+            display: none;
+        }
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 118%;
+
+        @include breakpoint(large) {
+            font-size: 20px;
+            line-height: 138%;
+        }
+
+
+        a {
+            color: get-color(trimary);
+        }
+    }
+}
+
+.info-characters {
+    h1 {
+        @include breakpoint(large) {
+            font-size: 3vw;
+            text-align: center;
+            padding: 25px 0;
+        }
+    }
+
+    .properties {
+        font-size: 14px;
+        line-height: 130%;
+
+        @include breakpoint(large) {
+            font-size: 22px;
+        }
+
+
+        .prop-names {
+            span {
+                float: right;
+            }
+        }
+
+        .prop-values {
+            margin-left: -1px;
+        }
+    }
+
+    .character-description {
+        padding: 15px 0;
+        font-size: 11px;
+
+        @include breakpoint(large) {
+            font-size: 19px;
+        }
+
+
+        p {
+            line-height: 130%;
+        }
+    }
+
+    #sage, #john, #malcolm {
+        position: relative;
+
+        .character-image {
+            position: absolute;
+        }
+
+        .character-arrow {
+            position: absolute;
+
+            @include breakpoint(medium down) {
+                display: none;
+            }
+        }
+    }
+
+    #sage {
+        .character-image {
+            width: 70px;
+            top: -70px;
+            right: 10px;
+
+            @include breakpoint(large) {
+                //width: 240px;
+                width: 17vw;
+                top: -7vw;
+                right: 5vw;
+            }
+        }
+
+        .character-arrow {
+            width: 13vw;
+            top: -20px;
+            left: 26vw;
+        }
+
+        .character-description {
+            @include breakpoint(large) {
+                width: 36vw;
+            }
+        }
+    }
+
+    #john {
+        .properties {
+            @include breakpoint(large) {
+                padding-top: 50px;
+                padding-right: 70px;
+            }
+
+
+            .prop-values {
+                width: 22vw;
+            }
+        }
+
+        .character-image {
+            width: 100px;
+            top: -10px;
+            left: 0px;
+
+            @include breakpoint(large) {
+                width: 21vw;
+                top: 0px;
+                left: -1vw;
+            }
+        }
+
+        .character-arrow {
+            width: 16vw;
+            top: -10px;
+            left: 21vw;
+        }
+
+        .character-description {
+            @include breakpoint(large) {
+                float: right;
+                width: 41vw;
+                padding-right: 80px;
+            }
+        }
+    }
+
+    #malcolm {
+
+        .properties {
+            @include breakpoint(large) {
+                padding-top: 30px;
+                width: 40vw;
+            }
+        }
+
+        .character-image {
+            @include breakpoint(medium down) {
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+                filter: FlipH;
+                -ms-filter: "FlipH";
+                width: 65px;
+                top: -20px;
+                right: 0px;
+            }
+
+
+            width: 19vw;
+            top: 90px;
+            right: 4vw;
+        }
+
+        .character-arrow {
+            width: 16vw;
+            top: 150px;
+            left: 21vw;
+        }
+
+        .character-description {
+            @include breakpoint(large) {
+                width: 41vw;
+            }
+        }
+
+    }
+}
