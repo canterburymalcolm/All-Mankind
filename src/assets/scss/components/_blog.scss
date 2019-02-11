@@ -1,0 +1,32 @@
+.blog-title {
+    padding-top: 40px;
+
+    h1 {
+        font-size: 25px;
+        line-height: 60%;
+
+        @include breakpoint(large) {
+            text-align: center;
+            font-size: 50px;
+            line-height: 110%;
+        }
+    }
+}
+
+.blog-body {
+    p {
+        font-size: 18px;
+        line-height: 118%;
+
+        @include breakpoint(large) {
+            font-size: 21px;
+            line-height: 125%;
+        }
+    }
+}
+
+.blog {
+    img {
+        padding: 10px 0;
+    }
+}
