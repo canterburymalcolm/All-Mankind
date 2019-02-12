@@ -9,6 +9,12 @@
     }
 }
 
+.icon.inactive {
+    img {
+        opacity: .4;
+    }
+}
+
 .icon {
     position: relative;
     text-align: center;

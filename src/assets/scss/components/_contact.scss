@@ -1,0 +1,53 @@
+.contact-title {
+    padding: 50px 0;
+
+    @include breakpoint(medium up) {
+        padding: 40px 0 20px 0;
+    }
+
+
+    h1 {
+        font-size: 40px;
+    }
+}
+
+.contact-input {
+    input {
+        padding-left: 0;
+    }
+
+    .field {
+        input {
+            border-style: none;
+            box-shadow: none;
+        }
+    }
+
+    .message {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        text-align: center;
+
+        textarea {
+            border-color: black;
+            border-width: 2px;
+            width: 80vw;
+            height: 175px;
+
+            @include breakpoint(medium up) {
+                width: 25vw;
+                height: 220px;
+            }
+        }
+    }
+
+    .contact-button {
+        input {
+            border-color: black;
+            border-width: 1.5px;
+            border-style: solid;
+            font-size: 16px;
+            height: 27px;
+        }
+    }
+}

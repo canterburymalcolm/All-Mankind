@@ -381,6 +381,9 @@ $(document).ready(function () {
                 addItem("THE MALCOLM", 40);
                 break;
             case "thumb-up-atc":
+                if (curItem.color === "") {
+                    curItem.color = "blue";
+                }
                 addItem("THUMB UP", 30);
                 break;
             case "the-john-atc":
@@ -417,7 +420,9 @@ $(document).ready(function () {
 
     //make extras icons clickable on mobile
     $(".icon .mobile").click(function () {
-        window.location.href = $(this).parent().find("a").attr("href");
+        if ($(this).parent().find("a").length > 0) {
+            window.location.href = $(this).parent().find("a").attr("href");
+        }
     })
 
     //CART
@@ -481,7 +486,8 @@ $(document).ready(function () {
     //add checkout card to purchase
     if ($(".cart").length > 0) {
         var handler = StripeCheckout.configure({
-            key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
+            //key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
+            key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
             image: 'assets/img/icons/boyHead.png',
             description: describeCart(),
             locale: 'auto',
@@ -546,7 +552,7 @@ $(document).ready(function () {
 
     //fill in subtotal and total values
     $("#order-subtotal").text("$" + calculateSubtotal());
-    $("#order-total-val").text("$" + (calculateSubtotal() + 5));
+    $("#order-total-val").text("$" + (calculateSubtotal()));
 
     //link order-button to store page
     $("#order-button").click( ()=> {
