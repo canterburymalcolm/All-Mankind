@@ -1,0 +1,12 @@
+.look-link {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 40px;
+    a {
+        color: black;
+    }
+
+    a:hover {
+        color: get-color(trimary);
+    }
+}

@@ -16,6 +16,35 @@ require('foundation-sites');
 var curItem = new Item("", "medium", "", 1);
 var numItems = 0;
 var cart = [];
+var panelImages = [];
+var panelIndex = 0;
+panelImages.push([
+    "zero/zero-crowd", 
+    "zero/zero-black", 
+    "zero/zero-booth", 
+    "zero/zero-close", 
+    "zero/zero-fence", 
+    "zero/zero-leafs", 
+    "zero/zero-loiter"]);
+panelImages.push([
+    "one/one-white", 
+    "one/one-bars", 
+    "one/one-gochu", 
+    "one/one-face", 
+    "one/one-rocky", 
+    "one/one-laces", 
+    "one/one-squat", 
+    "one/one-squint", 
+    "one/one-bus", 
+    "one/one-holes", 
+    "one/one-praise", 
+    "one/one-cute", 
+    "one/one-art", 
+    "one/one-dark", 
+    "one/one-rap", 
+    "one/one-model", 
+    "one/one-bench", 
+    "one/one-light"]);
 
 function Item(name, size, color, quantity, price, total) {
     this.name = name;
@@ -24,7 +53,6 @@ function Item(name, size, color, quantity, price, total) {
     this.quantity = quantity;
     this.price = price;
     this.total = total;
-
 }
 
 Item.prototype.sameItem = function (other) {
@@ -257,6 +285,108 @@ function calculateSubtotal() {
     }
     $("#subtotal > span").html("$" + subtotal);
     return subtotal;
+}
+
+function getPanels() {
+    var panels = [];
+    switch ($('.look-title').find('h1').text()) {
+        case ('Drop Zero'):
+            panels = panelImages[0];
+            break;
+        case ('Drop One'):
+            panels = panelImages[1];
+            break;
+        default:
+            panels = [];
+            break;
+    }
+
+    return panels;
+}
+
+function placePanels() {
+    var panels = getPanels();
+
+    var content = '';
+    for (var i = 0; i < 4; i++) {
+        content +=
+            '<div class="panel-img cell large-2">' +
+            '<img src="../assets/img/looks/' + panels[i] + '.jpg">' +
+            '</div>';
+    }
+    $('.panel-arrow').first().after(content);
+
+    $('.panel-img').addClass('opaque');
+    $('.panel-img').first().removeClass('opaque');
+}
+
+//update which panel is opaque
+function updateSelectedPanel(dir) {
+    var panels = getPanels();
+
+    console.log(panelIndex + " to ");
+
+    if (dir) {
+        if (panelIndex === (panels.length - 1)) {
+            panelIndex = 0;
+        } else {
+            panelIndex++
+        }
+    } else {
+        if (panelIndex === 0) {
+            panelIndex = panels.length - 1;
+        } else {
+            panelIndex--;
+        }
+    }
+
+    console.log("     : " + panelIndex);
+
+    $('.panel-img').addClass('opaque');
+    if (panelIndex < 5) {
+        $(".panel-img:nth-of-type(" + (panelIndex + 2) + ")").removeClass('opaque');
+    }
+}
+
+//change the main image to the next image in the given direction
+function updateMainImage(dir) {
+    var panels = getPanels();
+    
+    if ((panelIndex == 3 && dir) || (panelIndex == 0 && !dir)) {
+        updatePanels(!dir);
+        updateSelectedPanel(dir);
+    } else {
+        updateSelectedPanel(dir);
+    }
+
+    $('.main-img img')
+        .attr('src', '../assets/img/looks/' + panels[panelIndex] + '.jpg');
+}
+
+//move all the panels in the given direction
+function updatePanels(dir) {
+    var panels = getPanels();
+
+    if (dir) {
+        var last = panels[panels.length - 1];
+        for (var i = panels.length - 2; i > -2; i--) {
+            panels[i + 1] = panels[i];
+        }
+        panels[0] = last;
+    } else {
+        var first = panels[0];
+        for (var i = 1; i < panels.length; i++) {
+            panels[i - 1] = panels[i];
+        }
+        panels[panels.length - 1] = first;
+
+    }
+
+    updateSelectedPanel(dir);
+
+    $('.panel-img').each(function (i, obj) {
+        $(this).children('img').attr('src', '../assets/img/looks/' + panels[i] + '.jpg');
+    })
 }
 
 $(document).foundation();
@@ -544,10 +674,10 @@ $(document).ready(function () {
     //Clear cart when user leaves the confirmation page
     if ($(".confirm").length > 0) {
         $("#title, #cart, #store, #extras, #contact, #info, #lookbook, #navStore, #navExtras, "
-        + "#navInfo, #navLook, #navContact, #order-button").click(function () {
-            cart = [];
-            saveCart();
-        });
+            + "#navInfo, #navLook, #navContact, #order-button").click(function () {
+                cart = [];
+                saveCart();
+            });
     }
 
     //fill in subtotal and total values
@@ -555,10 +685,66 @@ $(document).ready(function () {
     $("#order-total-val").text("$" + (calculateSubtotal()));
 
     //link order-button to store page
-    $("#order-button").click( ()=> {
+    $("#order-button").click(() => {
         window.location.href = "store.html";
     });
 
+    //LookBook
+
+    //switch to panel image on click
+    $(".panels").on('click', '.panel-img', function () {
+        switch($(this)[0]) {
+            case($('.panel-img:nth-of-type(2)')[0]):
+                panelIndex = 0;
+                break;
+            case($('.panel-img:nth-of-type(3)')[0]):
+                panelIndex = 1;
+                break;
+            case($('.panel-img:nth-of-type(4)')[0]):
+                panelIndex = 2;
+                break;
+            default:
+                panelIndex = 3;
+                break;
+        }
+        $(".panel-img").addClass("opaque");
+        $(this).removeClass("opaque");
+        $(".main-img").find('img').attr("src", $(this).find('img').attr("src"));
+    });
+
+    //place panels when the page first loads
+    if ($('.look').length > 0) {
+        placePanels(false);
+    }
+
+    //move panels when the panel arrows are clicked
+    $('.panel-arrow').click(function () {
+        if ($(this).hasClass("r-arrow")) {
+            updatePanels(false);
+        } else {
+            updatePanels(true);
+        }
+    });
+
+    //move main image when main arrows are clicked
+    $('.main-arrow').click(function () {
+        if ($(this).find('.main-right').length > 0) {
+            updateMainImage(true);
+        } else {
+            updateMainImage(false);
+        }
+    })
+
+    //CONTACT
+
+    //submit form without leaving page
+    $('#contact-form').submit(function() {
+        $.post($(this).attr('action'), $(this).serialize(), function(response) {
+            //console.log(response);
+            //alert(response);
+        }, 'json');
+        return false;
+    });
 });
 
 //wait for all elements of product page to load before 

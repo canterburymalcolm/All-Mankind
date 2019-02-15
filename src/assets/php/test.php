@@ -1,3 +1,8 @@
 <?php
-echo 'hello';
+
+$name = $_POST['name'];
+
+echo $name;
+
+echo "\nhello";
 ?>

@@ -45,6 +45,33 @@
     }
 
     @include breakpoint(large) {
+
+        .zero {
+            width: 70%;
+        }
+
+        #zero-link {
+            position: absolute;
+            left: 4vw;
+            top: 1vw;
+            width: 15vw;
+            height: 21vw;
+            border-radius: 5vw;
+        }
+
+        .one {
+            width: 70%;
+        }
+
+        #one-link {
+            position: absolute;
+            left: 10.3vw;
+            top: .5vw;
+            width: 4.5vw;
+            height: 21.5vw;
+            border-radius: 5vw;
+        }
+
         .question {
             width: 80%;
         }
