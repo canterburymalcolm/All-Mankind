@@ -49,7 +49,7 @@
         line-height: 130%;
 
         @include breakpoint(large) {
-            font-size: 22px;
+            font-size: 28px;
         }
 
 
@@ -69,7 +69,7 @@
         font-size: 11px;
 
         @include breakpoint(large) {
-            font-size: 19px;
+            font-size: 1.2vw;
         }
 
 
@@ -140,7 +140,7 @@
             left: 0px;
 
             @include breakpoint(large) {
-                width: 21vw;
+                width: 20vw;
                 top: 0px;
                 left: -1vw;
             }
@@ -165,7 +165,7 @@
 
         .properties {
             @include breakpoint(large) {
-                padding-top: 30px;
+                padding-top: 3vw;
                 width: 40vw;
             }
         }
@@ -191,8 +191,8 @@
 
         .character-arrow {
             width: 16vw;
-            top: 150px;
-            left: 21vw;
+            top: 9vw;
+            left: 24vw;
         }
 
         .character-description {

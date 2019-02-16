@@ -6,10 +6,10 @@ $animal = $_POST['animal'];
 $message = $_POST['message'];
 
 $email_from = "info@allmankindisstupid.com";
-$email_subject = "php test email";
-$email_body = "$name who likes $animal\'s has sent you the following message:\n".
-                "$message".
-$to = "info@allmankindisstupid.com";
+$email_subject = "contact from: $visitor_email";
+$email_body = "$name who likes $animal's has sent you the following message:\n".
+                "$message\n".
+$to = "allmankindisstupid@gmail.com";
 $headers = "From: $email_from \r\n";
 $headers .= "Reply-To: $visitor_email \r\n";
 

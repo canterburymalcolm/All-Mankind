@@ -19,32 +19,62 @@ var cart = [];
 var panelImages = [];
 var panelIndex = 0;
 panelImages.push([
-    "zero/zero-crowd", 
-    "zero/zero-black", 
-    "zero/zero-booth", 
-    "zero/zero-close", 
-    "zero/zero-fence", 
-    "zero/zero-leafs", 
-    "zero/zero-loiter"]);
+    "looks/zero/zero-crowd.jpg",
+    "looks/zero/zero-black.jpg",
+    "looks/zero/zero-booth.jpg",
+    "looks/zero/zero-close.jpg",
+    "looks/zero/zero-fence.jpg",
+    "looks/zero/zero-leafs.jpg",
+    "looks/zero/zero-loiter.jpg"]);
+
 panelImages.push([
-    "one/one-white", 
-    "one/one-bars", 
-    "one/one-gochu", 
-    "one/one-face", 
-    "one/one-rocky", 
-    "one/one-laces", 
-    "one/one-squat", 
-    "one/one-squint", 
-    "one/one-bus", 
-    "one/one-holes", 
-    "one/one-praise", 
-    "one/one-cute", 
-    "one/one-art", 
-    "one/one-dark", 
-    "one/one-rap", 
-    "one/one-model", 
-    "one/one-bench", 
-    "one/one-light"]);
+    "looks/one/one-white.jpg",
+    "looks/one/one-bars.jpg",
+    "looks/one/one-gochu.jpg",
+    "looks/one/one-face.jpg",
+    "looks/one/one-rocky.jpg",
+    "looks/one/one-laces.jpg",
+    "looks/one/one-squat.jpg",
+    "looks/one/one-squint.jpg",
+    "looks/one/one-bus.jpg",
+    "looks/one/one-holes.jpg",
+    "looks/one/one-praise.jpg",
+    "looks/one/one-cute.jpg",
+    "looks/one/one-art.jpg",
+    "looks/one/one-dark.jpg",
+    "looks/one/one-rap.jpg",
+    "looks/one/one-model.jpg",
+    "looks/one/one-bench.jpg",
+    "looks/one/one-light.jpg"]);
+
+panelImages.push([
+    "products/fishHeads/fish-front.png",
+    "products/fishHeads/fish-close.jpg",
+    "products/fishHeads/fish-face.jpg",
+    "products/fishHeads/fish-squat.jpg"]);
+
+panelImages.push([
+    "products/theJohn/john-front.png",
+    "products/theJohn/john-back.png",
+    "products/theJohn/john-aglet.jpg",
+    "products/theJohn/john-tag.jpg",
+    "products/theJohn/john-face.jpg",
+    "products/theJohn/john-stairs.jpg",
+    "products/theJohn/john-vest.jpg"]);
+
+panelImages.push([
+    "products/theMalcolm/mBack.png",
+    "products/theMalcolm/mFront.png",
+    "products/theMalcolm/mLeaf.jpg",
+    "products/theMalcolm/mStreet.jpg"]);
+
+panelImages.push([
+    "products/thumbUp/thumb-blue-front.png",
+    "products/thumbUp/thumb-blue-back.png",
+    "products/thumbUp/thumb-blue-front-close.jpg",
+    "products/thumbUp/thumb-blue-back-close.jpg",
+    "products/thumbUp/thumb-swiss.jpg",
+    "products/thumbUp/thumb-stare.jpg"]);
 
 function Item(name, size, color, quantity, price, total) {
     this.name = name;
@@ -283,22 +313,48 @@ function calculateSubtotal() {
             .parents(".cart-member")
             .find(".desktop-price").html("$" + cart[i].price + "  x  " + cart[i].quantity + " = " + cart[i].total);
     }
+    if ($('#local-check').prop('checked')) {
+        $('#cart-shipping').text('FREE');
+    } else {
+        subtotal += 5;
+        $('#cart-shipping').text('$5');
+    }
     $("#subtotal > span").html("$" + subtotal);
     return subtotal;
 }
 
 function getPanels() {
     var panels = [];
-    switch ($('.look-title').find('h1').text()) {
-        case ('Drop Zero'):
-            panels = panelImages[0];
-            break;
-        case ('Drop One'):
-            panels = panelImages[1];
-            break;
-        default:
-            panels = [];
-            break;
+    if ($('.look').length > 0) {
+        switch ($('.look-title').find('h1').text()) {
+            case ('Drop Zero'):
+                panels = panelImages[0];
+                break;
+            case ('Drop One'):
+                panels = panelImages[1];
+                break;
+            default:
+                panels = [];
+                break;
+        }
+    } else {
+        switch ($('.desc-grid .title').find('span').text()) {
+            case ('FISH HEADS'):
+                panels = panelImages[2];
+                break;
+            case ('THE JOHN'):
+                panels = panelImages[3];
+                break;
+            case ('THE MALCOLM'):
+                panels = panelImages[4];
+                break;
+            case ('THUMB UP'):
+                panels = panelImages[5];
+                break;
+            default:
+                panels = [];
+                break;
+        }
     }
 
     return panels;
@@ -311,7 +367,7 @@ function placePanels() {
     for (var i = 0; i < 4; i++) {
         content +=
             '<div class="panel-img cell large-2">' +
-            '<img src="../assets/img/looks/' + panels[i] + '.jpg">' +
+            '<img src="../assets/img/' + panels[i] + '">' +
             '</div>';
     }
     $('.panel-arrow').first().after(content);
@@ -351,7 +407,7 @@ function updateSelectedPanel(dir) {
 //change the main image to the next image in the given direction
 function updateMainImage(dir) {
     var panels = getPanels();
-    
+
     if ((panelIndex == 3 && dir) || (panelIndex == 0 && !dir)) {
         updatePanels(!dir);
         updateSelectedPanel(dir);
@@ -360,7 +416,7 @@ function updateMainImage(dir) {
     }
 
     $('.main-img img')
-        .attr('src', '../assets/img/looks/' + panels[panelIndex] + '.jpg');
+        .attr('src', '../assets/img/' + panels[panelIndex]);
 }
 
 //move all the panels in the given direction
@@ -385,7 +441,7 @@ function updatePanels(dir) {
     updateSelectedPanel(dir);
 
     $('.panel-img').each(function (i, obj) {
-        $(this).children('img').attr('src', '../assets/img/looks/' + panels[i] + '.jpg');
+        $(this).children('img').attr('src', '../assets/img/' + panels[i]);
     })
 }
 
@@ -475,15 +531,21 @@ $(document).ready(function () {
         curItem.quantity = num;
     });
 
-    function setProductPics(back, front) {
-        $("#mFront").attr("src", "../assets/img/products/" + front);
-        $("#mBack").attr("src", "../assets/img/products/" + back);
-        if ($("#mBack").parent().css("opacity") == 1) {
-            $(".primary").attr("src", "../assets/img/products/" + back);
-        } else if ($("#mFront").parent().css("opacity") == 1) {
-            $(".primary").attr("src", "../assets/img/products/" + front);
+    function setProductPics(old, current) {
+        var panels = getPanels();
+        var regex = new RegExp(old, "g");
+
+        for (var i = 0; i < panels.length; i++) {
+            panels[i] = panels[i].replace(regex, current)
         }
+
+        $('.main-img img').attr('src', $('.main-img img').attr('src').replace(regex, current));
+
+        $('.panel-img').each(function (i, obj) {
+            $(this).children('img').attr('src', '../assets/img/' + panels[i]);
+        })
     }
+
 
     //color select-size buttons on click and set size of curItem
     $(".select-size .button, .select-color .button").click(function () {
@@ -492,12 +554,12 @@ $(document).ready(function () {
             $(this).css("background-color", "#f6e8ed");
             $("#blue").css("background-color", "white");
             curItem.color = "pink";
-            setProductPics("thumbUp/thumbPinkBack.png", "thumbUp/thumbPinkFront.png");
+            setProductPics("blue", "pink");
         } else if ($(this).is("#blue")) {
             $(this).css("background-color", "#bccce2");
             $("#pink").css("background-color", "white");
             curItem.color = "blue";
-            setProductPics("thumbUp/thumbBlueBack.png", "thumbUp/thumbBlueFront.png");
+            setProductPics("pink", "blue");
         } else {
             $(this).css("background-color", "gainsboro");
             curItem.size = $(this).attr("id");
@@ -548,7 +610,7 @@ $(document).ready(function () {
         }
     );
 
-    //make extras icons clickable on mobile
+    //make extras icons clicpinke on mobile
     $(".icon .mobile").click(function () {
         if ($(this).parent().find("a").length > 0) {
             window.location.href = $(this).parent().find("a").attr("href");
@@ -613,18 +675,22 @@ $(document).ready(function () {
         window.location.href = "store.html";
     })
 
+    $('#local-check').click(function () {
+        calculateSubtotal();
+    })
+
     //add checkout card to purchase
     if ($(".cart").length > 0) {
         var handler = StripeCheckout.configure({
-            //key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
-            key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
-            image: 'assets/img/icons/boyHead.png',
+            key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
+            //key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
+            image: 'https://allmankindisstupid.com/assets/img/icons/boyHead.png',
             description: describeCart(),
             locale: 'auto',
             billingAddress: true,
             shippingAddress: true,
             zipCode: true,
-            token: function (token) {
+            token: function (token, args) {
                 $.ajax({
                     method: "POST",
                     url: "assets/php/charge-request.php",
@@ -634,7 +700,8 @@ $(document).ready(function () {
                         amount: (calculateSubtotal() * 100).toString(),
                         description: describeCart(),
                         email: token.email,
-                        cart: JSON.stringify(cart)
+                        cart: JSON.stringify(cart),
+                        args: args
                     }
                 }).done(function (result) {
                     saveCart();
@@ -693,14 +760,14 @@ $(document).ready(function () {
 
     //switch to panel image on click
     $(".panels").on('click', '.panel-img', function () {
-        switch($(this)[0]) {
-            case($('.panel-img:nth-of-type(2)')[0]):
+        switch ($(this)[0]) {
+            case ($('.panel-img:nth-of-type(2)')[0]):
                 panelIndex = 0;
                 break;
-            case($('.panel-img:nth-of-type(3)')[0]):
+            case ($('.panel-img:nth-of-type(3)')[0]):
                 panelIndex = 1;
                 break;
-            case($('.panel-img:nth-of-type(4)')[0]):
+            case ($('.panel-img:nth-of-type(4)')[0]):
                 panelIndex = 2;
                 break;
             default:
@@ -713,7 +780,7 @@ $(document).ready(function () {
     });
 
     //place panels when the page first loads
-    if ($('.look').length > 0) {
+    if (($('.look').length > 0) || ($('.listing').length > 0)) {
         placePanels(false);
     }
 
@@ -738,11 +805,13 @@ $(document).ready(function () {
     //CONTACT
 
     //submit form without leaving page
-    $('#contact-form').submit(function() {
-        $.post($(this).attr('action'), $(this).serialize(), function(response) {
-            //console.log(response);
-            //alert(response);
+    $('#contact-form').submit(function () {
+        $.post($(this).attr('action'), $(this).serialize(), function (response) {
         }, 'json');
+
+        alert("Your message was sent, we will get back to you as soon as possible");
+        $(this).find('input[type=text], input[type=email], textarea').val('');
+
         return false;
     });
 });
