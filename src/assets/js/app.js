@@ -16,6 +16,7 @@ require('foundation-sites');
 var curItem = new Item("", "medium", "", 1);
 var numItems = 0;
 var cart = [];
+var shipping = 0;
 var panelImages = [];
 var panelIndex = 0;
 panelImages.push([
@@ -56,7 +57,7 @@ panelImages.push([
 panelImages.push([
     "products/theJohn/john-front.png",
     "products/theJohn/john-back.png",
-    "products/theJohn/john-aglet.jpg",
+    "products/theJohn/john-aglets.jpg",
     "products/theJohn/john-tag.jpg",
     "products/theJohn/john-face.jpg",
     "products/theJohn/john-stairs.jpg",
@@ -134,13 +135,14 @@ function saveCart() {
         item.total = item.price * item.quantity;
     })
     localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('shipping', JSON.stringify(shipping));
     updateCart();
 }
 
 function loadCart() {
     cart = JSON.parse(localStorage.getItem("cart"));
+    shipping = JSON.parse(localStorage.getItem('shipping'));
     if (cart === null) {
-        console.log("no cart found");
         cart = [];
     } else {
         cart.forEach(item => {
@@ -150,6 +152,15 @@ function loadCart() {
         placeCart();
         placeOrder();
     }
+
+    console.log(shipping);
+    if (shipping === null) {
+        shipping = 0;
+    } else if (shipping === 5) {
+        console.log('checking box');
+        $('#local-check').prop('checked', true);
+    }
+
     console.log(describeCart());
 }
 
@@ -313,12 +324,14 @@ function calculateSubtotal() {
             .parents(".cart-member")
             .find(".desktop-price").html("$" + cart[i].price + "  x  " + cart[i].quantity + " = " + cart[i].total);
     }
-    if ($('#local-check').prop('checked')) {
+
+    if (shipping === 0) {
         $('#cart-shipping').text('FREE');
-    } else {
-        subtotal += 5;
+    } else if(shipping === 5) {
         $('#cart-shipping').text('$5');
     }
+    subtotal += shipping;
+
     $("#subtotal > span").html("$" + subtotal);
     return subtotal;
 }
@@ -465,6 +478,7 @@ $(document).ready(function () {
         }
     });
 
+    //close the hamburger menu when exit is pressed
     $("#exit").click(function () {
         $(".hamburger").css("display", "none");
         $("#hamburger-open").css("display", "none");
@@ -512,7 +526,6 @@ $(document).ready(function () {
     //         magnify: 1.5
     //     });
     // });
-
 
     //link from store to individual product pages
     $(".product").click(function () {
@@ -675,7 +688,14 @@ $(document).ready(function () {
         window.location.href = "store.html";
     })
 
+    //update shipping price when local shipping checkbox is clicked
     $('#local-check').click(function () {
+        if ($(this).prop('checked')) {
+            shipping = 5;
+        } else {
+            shipping = 0;
+        }
+        saveCart();
         calculateSubtotal();
     })
 
@@ -683,7 +703,6 @@ $(document).ready(function () {
     if ($(".cart").length > 0) {
         var handler = StripeCheckout.configure({
             key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
-            //key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
             image: 'https://allmankindisstupid.com/assets/img/icons/boyHead.png',
             description: describeCart(),
             locale: 'auto',
@@ -749,6 +768,9 @@ $(document).ready(function () {
 
     //fill in subtotal and total values
     $("#order-subtotal").text("$" + calculateSubtotal());
+    if (shipping === 5) {
+        $("#order-shipping").text("$" + shipping);
+    }
     $("#order-total-val").text("$" + (calculateSubtotal()));
 
     //link order-button to store page
