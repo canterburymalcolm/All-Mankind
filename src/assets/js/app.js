@@ -16,7 +16,7 @@ require('foundation-sites');
 var curItem = new Item("", "medium", "", 1);
 var numItems = 0;
 var cart = [];
-var shipping = 0;
+var shipping = 5;
 var panelImages = [];
 var panelIndex = 0;
 panelImages.push([
@@ -76,6 +76,15 @@ panelImages.push([
     "products/thumbUp/thumb-blue-back-close.jpg",
     "products/thumbUp/thumb-swiss.jpg",
     "products/thumbUp/thumb-stare.jpg"]);
+
+panelImages.push([
+    "products/theMalcolmII/single-back.jpg",
+    "products/theMalcolmII/cerb-front.jpg",
+    "products/theMalcolmII/forrest-low.jpg",
+    "products/theMalcolmII/forrest-mid.jpg",
+    "products/theMalcolmII/cerb-store.jpg",
+    "products/theMalcolmII/cerb-snow.jpg",
+    "products/theMalcolmII/cerb-face.jpg"]);
 
 function Item(name, size, color, quantity, price, total) {
     this.name = name;
@@ -155,8 +164,8 @@ function loadCart() {
 
     console.log(shipping);
     if (shipping === null) {
-        shipping = 0;
-    } else if (shipping === 5) {
+        shipping = 5;
+    } else if (shipping === 0) {
         console.log('checking box');
         $('#local-check').prop('checked', true);
     }
@@ -191,6 +200,13 @@ function placeCart() {
                     image = "thumbBlueBack.png";
                 } else {
                     image = "thumbPinkBack.png";
+                }
+            } else if (item.name === "THE MALCOLM II") {
+                page = "the-malcolmII.html";
+                if (item.color === "cerberus") {
+                    image = "three-back.jpg";
+                } else {
+                    image = "single-back.jpg";
                 }
             }
             var member =
@@ -273,7 +289,15 @@ function placeOrder() {
                 } else {
                     image = "thumbPinkBack.png";
                 }
+            } else if (item.name === "THE MALCOLM II") {
+                page = "the-malcolmII.html";
+                if (item.color === "cerberus") {
+                    image = "three-back.jpg";
+                } else {
+                    image = "single-back.jpg";
+                }
             }
+
             var member =
                 '<div class="cell grid-x grid-margin-x align-center">' +
                 '<div class="cell small-7 large-3">' +
@@ -363,6 +387,9 @@ function getPanels() {
                 break;
             case ('THUMB UP'):
                 panels = panelImages[5];
+                break;
+            case ('THE MALCOLM II'):
+                panels = panelImages[6];
                 break;
             default:
                 panels = [];
@@ -573,6 +600,16 @@ $(document).ready(function () {
             $("#pink").css("background-color", "white");
             curItem.color = "blue";
             setProductPics("pink", "blue");
+        } else if ($(this).is("#three")) {
+            $(this).css("background-color", "gainsboro");
+            $("#single").css("background-color", "white");
+            curItem.color = "cerberus";
+            setProductPics("single", "three");
+        } else if ($(this).is("#single")) {
+            $(this).css("background-color", "gainsboro");
+            $("#three").css("background-color", "white");
+            curItem.color = "regular";
+            setProductPics("three", "single");
         } else {
             $(this).css("background-color", "gainsboro");
             curItem.size = $(this).attr("id");
@@ -596,6 +633,9 @@ $(document).ready(function () {
                 break;
             case "fish-heads-atc":
                 addItem("FISH HEADS", 12);
+                break;
+            case "the-malcolmII-atc":
+                addItem("THE MALCOLM II", 50);
                 break;
         }
         $(".go-to-cart").css("display", "block");
@@ -691,9 +731,9 @@ $(document).ready(function () {
     //update shipping price when local shipping checkbox is clicked
     $('#local-check').click(function () {
         if ($(this).prop('checked')) {
-            shipping = 5;
-        } else {
             shipping = 0;
+        } else {
+            shipping = 5;
         }
         saveCart();
         calculateSubtotal();

@@ -2,6 +2,10 @@
     margin-top: 25px;
     padding-bottom: 8vw;
 
+    @include breakpoint(large) {
+        padding-bottom: 180px;
+    }
+
     .product {
         position: relative;
         text-align: center;
@@ -37,7 +41,13 @@
                 opacity: 0;
                 transition: opacity 0.2s ease-in-out;
             }
-       }
+        }
+
+        #malcolmII {
+            @include breakpoint(large) {
+                width: 18vw;
+            }
+        }
 
         #fishheads {
             @include breakpoint(large) {
