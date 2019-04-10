@@ -6,6 +6,7 @@
         padding-bottom: 180px;
     }
 
+
     .product {
         position: relative;
         text-align: center;
@@ -21,6 +22,7 @@
                 margin: 0px 1vw 0 1vw;
             }
 
+
             img {
                 @include breakpoint(large) {
                     position: absolute;
@@ -31,7 +33,7 @@
                     height: 100%;
                 }
             }
- 
+
             .secondary {
                 position: absolute;
                 background-color: white;
@@ -43,19 +45,19 @@
             }
         }
 
-        #malcolmII {
-            @include breakpoint(large) {
+        @include breakpoint(large) {
+            #malcolmII {
                 width: 18vw;
             }
-        }
 
-        #fishheads {
-            @include breakpoint(large) {
+            #fishheads {
                 width: 11vw;
             }
-        }
 
-        @include breakpoint(large) {
+            #big-head {
+                width: 18vw;
+            }
+
             .store-image:hover {
                 .secondary {
                     opacity: 1;

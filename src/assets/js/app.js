@@ -19,6 +19,7 @@ var cart = [];
 var shipping = 5;
 var panelImages = [];
 var panelIndex = 0;
+
 panelImages.push([
     "looks/zero/zero-crowd.jpg",
     "looks/zero/zero-black.jpg",
@@ -26,7 +27,8 @@ panelImages.push([
     "looks/zero/zero-close.jpg",
     "looks/zero/zero-fence.jpg",
     "looks/zero/zero-leafs.jpg",
-    "looks/zero/zero-loiter.jpg"]);
+    "looks/zero/zero-loiter.jpg"
+]);
 
 panelImages.push([
     "looks/one/one-white.jpg",
@@ -46,13 +48,15 @@ panelImages.push([
     "looks/one/one-rap.jpg",
     "looks/one/one-model.jpg",
     "looks/one/one-bench.jpg",
-    "looks/one/one-light.jpg"]);
+    "looks/one/one-light.jpg"
+]);
 
 panelImages.push([
     "products/fishHeads/fish-front.png",
     "products/fishHeads/fish-close.jpg",
     "products/fishHeads/fish-face.jpg",
-    "products/fishHeads/fish-squat.jpg"]);
+    "products/fishHeads/fish-squat.jpg"
+]);
 
 panelImages.push([
     "products/theJohn/john-front.png",
@@ -61,13 +65,15 @@ panelImages.push([
     "products/theJohn/john-tag.jpg",
     "products/theJohn/john-face.jpg",
     "products/theJohn/john-stairs.jpg",
-    "products/theJohn/john-vest.jpg"]);
+    "products/theJohn/john-vest.jpg"
+]);
 
 panelImages.push([
     "products/theMalcolm/mBack.png",
     "products/theMalcolm/mFront.png",
     "products/theMalcolm/mLeaf.jpg",
-    "products/theMalcolm/mStreet.jpg"]);
+    "products/theMalcolm/mStreet.jpg"
+]);
 
 panelImages.push([
     "products/thumbUp/thumb-blue-front.png",
@@ -75,16 +81,34 @@ panelImages.push([
     "products/thumbUp/thumb-blue-front-close.jpg",
     "products/thumbUp/thumb-blue-back-close.jpg",
     "products/thumbUp/thumb-swiss.jpg",
-    "products/thumbUp/thumb-stare.jpg"]);
+    "products/thumbUp/thumb-stare.jpg"
+]);
 
 panelImages.push([
     "products/theMalcolmII/single-back.jpg",
     "products/theMalcolmII/cerb-front.jpg",
+    "products/theMalcolmII/cerb-aglets.jpg",
     "products/theMalcolmII/forrest-low.jpg",
     "products/theMalcolmII/forrest-mid.jpg",
     "products/theMalcolmII/cerb-store.jpg",
     "products/theMalcolmII/cerb-snow.jpg",
-    "products/theMalcolmII/cerb-face.jpg"]);
+    "products/theMalcolmII/cerb-face.jpg"
+]);
+
+panelImages.push([
+    "products/bigHead/big-h-front.png",
+    "products/bigHead/big-h-back.png",
+    "products/bigHead/big-h-sit.png",
+    "products/bigHead/big-h-crop.png",
+    "products/bigHead/big-h-pole.jpg"
+]);
+
+panelImages.push([
+    "products/sixHead/six-h-front.png",
+    "products/sixHead/six-h-head.jpg",
+    "products/sixHead/six-h-sit.png",
+    "products/sixHead/six-h-stand.jpg"
+]);
 
 function Item(name, size, color, quantity, price, total) {
     this.name = name;
@@ -185,30 +209,48 @@ function placeCart() {
             var item = cart[i];
             var page = "#";
             var image;
-            if (item.name === "THE MALCOLM") {
-                page = "the-malcolm.html";
-                image = "mBack.png";
-            } else if (item.name === "THE JOHN") {
-                page = "the-john.html";
-                image = "johnBack.png";
-            } else if (item.name === "FISH HEADS") {
-                page = "fish-heads.html";
-                image = "fishFront.png";
-            } else if (item.name === "THUMB UP") {
-                page = "thumb-up.html";
-                if (item.color === "blue") {
-                    image = "thumbBlueBack.png";
-                } else {
-                    image = "thumbPinkBack.png";
-                }
-            } else if (item.name === "THE MALCOLM II") {
-                page = "the-malcolmII.html";
-                if (item.color === "cerberus") {
-                    image = "three-back.jpg";
-                } else {
-                    image = "single-back.jpg";
-                }
+            switch (item.name) {
+                case ("THE MALCOLM"):
+                    page = "the-malcolm.html";
+                    image = "mBack.png";
+                    break;
+                case ("THE JOHN"):
+                    page = "the-john.html";
+                    image = "johnBack.png";
+                    break;
+                case ("FISH HEADS"):
+                    page = "fish-heads.html";
+                    image = "fishFront.png";
+                    break;
+                case ("THUMB UP"): 
+                    page = "thumb-up.html";
+                    if (item.color === "blue") {
+                        image = "thumbBlueBack.png";
+                    } else {
+                        image = "thumbPinkBack.png";
+                    }
+                    break;
+                case ("THE MALCOLM II"): 
+                    page = "the-malcolmII.html";
+                    if (item.color === "cerberus") {
+                        image = "three-back.jpg";
+                    } else {
+                        image = "single-back.jpg";
+                    }
+                    break;
+                case ("THE BIG-HEAD"):
+                    page = "big-head.html";
+                    image = "big-h-front.png";
+                    break;
+                case ("THE 6-HEAD"):
+                    page = "six-head.html";
+                    image = "six-h-front.png";
+                    break;
+                default:
+                    page = "six-head.html";
+                    image = "six-h-front.png";
             }
+
             var member =
                 '<div class="cell small-11 large-7">' +
                 '<div class="cart-member grid-x grid-margin-x">' +
@@ -224,7 +266,7 @@ function placeCart() {
                 '<div class="cart-member-menus">' +
                 '<ul class="dropdown-menu">';
 
-            if (item.name != "FISH HEADS") {
+            if (item.name != "FISH HEADS" && item.name != "THE 6-HEAD") {
                 member +=
                     '<li class="size-0">' +
                     '<span>' + item.size.toUpperCase() + '</span>' +
@@ -235,6 +277,19 @@ function placeCart() {
                     '<li class="size-3"><span>LARGE</span></li>' +
                     '</ul>' +
                     '</li>';
+            } else if (item.name === "THE 6-HEAD") {
+                member +=
+                    '<li class="size-0">' +
+                    '<span>' + item.size.toUpperCase() + '</span>' +
+                    '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
+                    '<ul class="sub-menu size-menu">' +
+                    '<li class="size-1"><span>SMALL</span></li>' +
+                    '<li class="size-2"><span>MEDIUM</span></li>' +
+                    '<li class="size-3"><span>LARGE</span></li>' +
+                    '<li class="size-3"><span>X-LARGE</span></li>' +
+                    '</ul>' +
+                    '</li>';
+
             }
             member +=
                 '<li class="quantity-num">' +
@@ -273,29 +328,46 @@ function placeOrder() {
             var item = cart[i];
             var page = "#";
             var image;
-            if (item.name === "THE MALCOLM") {
-                page = "the-malcolm.html";
-                image = "mBack.png";
-            } else if (item.name === "THE JOHN") {
-                page = "the-john.html";
-                image = "johnBack.png";
-            } else if (item.name === "FISH HEADS") {
-                page = "fish-heads.html";
-                image = "fishFront.png";
-            } else if (item.name === "THUMB UP") {
-                page = "thumb-up.html";
-                if (item.color === "blue") {
-                    image = "thumbBlueBack.png";
-                } else {
-                    image = "thumbPinkBack.png";
-                }
-            } else if (item.name === "THE MALCOLM II") {
-                page = "the-malcolmII.html";
-                if (item.color === "cerberus") {
-                    image = "three-back.jpg";
-                } else {
-                    image = "single-back.jpg";
-                }
+            switch (item.name) {
+                case ("THE MALCOLM"):
+                    page = "the-malcolm.html";
+                    image = "mBack.png";
+                    break;
+                case ("THE JOHN"):
+                    page = "the-john.html";
+                    image = "johnBack.png";
+                    break;
+                case ("FISH HEADS"):
+                    page = "fish-heads.html";
+                    image = "fishFront.png";
+                    break;
+                case ("THUMB UP"): 
+                    page = "thumb-up.html";
+                    if (item.color === "blue") {
+                        image = "thumbBlueBack.png";
+                    } else {
+                        image = "thumbPinkBack.png";
+                    }
+                    break;
+                case ("THE MALCOLM II"): 
+                    page = "the-malcolmII.html";
+                    if (item.color === "cerberus") {
+                        image = "three-back.jpg";
+                    } else {
+                        image = "single-back.jpg";
+                    }
+                    break;
+                case ("THE BIG-HEAD"):
+                    page = "big-head.html";
+                    image = "big-h-front.png";
+                    break;
+                case ("THE 6-HEAD"):
+                    page = "six-head.html";
+                    image = "six-h-front.png";
+                    break;
+                default:
+                    page = "six-head.html";
+                    image = "six-h-front.png";
             }
 
             var member =
@@ -351,8 +423,8 @@ function calculateSubtotal() {
 
     if (shipping === 0) {
         $('#cart-shipping').text('FREE');
-    } else if(shipping === 5) {
-        $('#cart-shipping').text('$5');
+    } else {
+        $('#cart-shipping').text('$' + shipping);
     }
     subtotal += shipping;
 
@@ -390,6 +462,12 @@ function getPanels() {
                 break;
             case ('THE MALCOLM II'):
                 panels = panelImages[6];
+                break;
+            case ('THE BIG-HEAD'):
+                panels = panelImages[7];
+                break;
+            case ('THE 6-HEAD'):
+                panels = panelImages[8];
                 break;
             default:
                 panels = [];
@@ -620,7 +698,6 @@ $(document).ready(function () {
     $(".add-to-cart .button").click(function () {
         switch ($(this).attr("id")) {
             case "the-malcolm-atc":
-                addItem("THE MALCOLM", 40);
                 break;
             case "thumb-up-atc":
                 if (curItem.color === "") {
@@ -635,7 +712,12 @@ $(document).ready(function () {
                 addItem("FISH HEADS", 12);
                 break;
             case "the-malcolmII-atc":
-                addItem("THE MALCOLM II", 50);
+                break;
+            case "big-head-atc":
+                addItem("THE BIG-HEAD", 35);
+                break;
+            case "six-head-atc":
+                addItem("THE 6-HEAD", 20);
                 break;
         }
         $(".go-to-cart").css("display", "block");
@@ -729,9 +811,15 @@ $(document).ready(function () {
     })
 
     //update shipping price when local shipping checkbox is clicked
-    $('#local-check').click(function () {
+    $('#local-check, #foreign-check').click(function () {
         if ($(this).prop('checked')) {
-            shipping = 0;
+            if ($(this).is('#local-check')) {
+                shipping = 0;
+                $('#foreign-check').prop('checked', false);
+            } else {
+                shipping = 30;
+                $('#local-check').prop('checked', false);
+            }
         } else {
             shipping = 5;
         }
@@ -743,6 +831,7 @@ $(document).ready(function () {
     if ($(".cart").length > 0) {
         var handler = StripeCheckout.configure({
             key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
+            //key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
             image: 'https://allmankindisstupid.com/assets/img/icons/boyHead.png',
             description: describeCart(),
             locale: 'auto',

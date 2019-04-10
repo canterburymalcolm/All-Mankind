@@ -30,6 +30,11 @@ a {
     @include flex-align($x: center);
 }
 
-.align-spaced{
+.align-spaced {
     @include flex-align($x: spaced);
+}
+
+.no-margin {
+    margin-left: 0  !important;
+    margin-right: 0  !important;
 }
