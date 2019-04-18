@@ -222,7 +222,7 @@ function placeCart() {
                     page = "fish-heads.html";
                     image = "fishFront.png";
                     break;
-                case ("THUMB UP"): 
+                case ("THUMB UP"):
                     page = "thumb-up.html";
                     if (item.color === "blue") {
                         image = "thumbBlueBack.png";
@@ -230,7 +230,7 @@ function placeCart() {
                         image = "thumbPinkBack.png";
                     }
                     break;
-                case ("THE MALCOLM II"): 
+                case ("THE MALCOLM II"):
                     page = "the-malcolmII.html";
                     if (item.color === "cerberus") {
                         image = "three-back.jpg";
@@ -266,7 +266,7 @@ function placeCart() {
                 '<div class="cart-member-menus">' +
                 '<ul class="dropdown-menu">';
 
-            if (item.name != "FISH HEADS" && item.name != "THE 6-HEAD") {
+            if (item.name != "FISH HEADS" && item.name != "THE 6-HEAD" && item.name != "THE JOHN") {
                 member +=
                     '<li class="size-0">' +
                     '<span>' + item.size.toUpperCase() + '</span>' +
@@ -286,7 +286,17 @@ function placeCart() {
                     '<li class="size-1"><span>SMALL</span></li>' +
                     '<li class="size-2"><span>MEDIUM</span></li>' +
                     '<li class="size-3"><span>LARGE</span></li>' +
-                    '<li class="size-3"><span>X-LARGE</span></li>' +
+                    '<li class="size-3"><span>XL</span></li>' +
+                    '</ul>' +
+                    '</li>';
+
+            } else if (item.name === "THE JOHN") {
+                member +=
+                    '<li class="size-0">' +
+                    '<span>' + item.size.toUpperCase() + '</span>' +
+                    '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
+                    '<ul class="sub-menu size-menu">' +
+                    '<li class="size-1"><span>SMALL</span></li>' +
                     '</ul>' +
                     '</li>';
 
@@ -341,7 +351,7 @@ function placeOrder() {
                     page = "fish-heads.html";
                     image = "fishFront.png";
                     break;
-                case ("THUMB UP"): 
+                case ("THUMB UP"):
                     page = "thumb-up.html";
                     if (item.color === "blue") {
                         image = "thumbBlueBack.png";
@@ -349,7 +359,7 @@ function placeOrder() {
                         image = "thumbPinkBack.png";
                     }
                     break;
-                case ("THE MALCOLM II"): 
+                case ("THE MALCOLM II"):
                     page = "the-malcolmII.html";
                     if (item.color === "cerberus") {
                         image = "three-back.jpg";
@@ -706,7 +716,9 @@ $(document).ready(function () {
                 addItem("THUMB UP", 30);
                 break;
             case "the-john-atc":
-                addItem("THE JOHN", 50);
+                if (curItem.size === 'small') {
+                    addItem("THE JOHN", 50);
+                }
                 break;
             case "fish-heads-atc":
                 addItem("FISH HEADS", 12);
@@ -717,7 +729,6 @@ $(document).ready(function () {
                 addItem("THE BIG-HEAD", 35);
                 break;
             case "six-head-atc":
-                addItem("THE 6-HEAD", 20);
                 break;
         }
         $(".go-to-cart").css("display", "block");
