@@ -110,6 +110,25 @@ panelImages.push([
     "products/sixHead/six-h-stand.jpg"
 ]);
 
+panelImages.push([
+    "products/dokkaebi/dok-back.png",
+    "products/dokkaebi/dok-front.png",
+    "products/dokkaebi/dok-glow.jpg",
+    "products/dokkaebi/dok-rail.jpg",
+    "products/dokkaebi/dok-art.jpg",
+    "products/dokkaebi/dok-food.jpg"
+]);
+
+panelImages.push([
+    "products/elCipitio/cipitio-back.png",
+    "products/elCipitio/cipitio-front.png",
+    "products/elCipitio/cipitio-plant.jpg",
+    "products/elCipitio/cipitio-slide.jpg",
+    "products/elCipitio/cipitio-window.jpg",
+    "products/elCipitio/cipitio-art.jpg",
+    "products/elCipitio/cipitio-squat.jpg"
+]);
+
 function Item(name, size, color, quantity, price, total) {
     this.name = name;
     this.size = size;
@@ -246,6 +265,14 @@ function placeCart() {
                     page = "six-head.html";
                     image = "six-h-front.png";
                     break;
+                case ("DOKKAEBI"):
+                    page = "dokkaebi.html";
+                    image = "dok-back.png";
+                    break;
+                case ("EL CIPITÍO"):
+                    page = "el-cipitio.html";
+                    image = "cipitio-back.png";
+                    break;
                 default:
                     page = "six-head.html";
                     image = "six-h-front.png";
@@ -277,7 +304,7 @@ function placeCart() {
                     '<li class="size-3"><span>LARGE</span></li>' +
                     '</ul>' +
                     '</li>';
-            } else if (item.name === "THE 6-HEAD") {
+            } else if (item.name === "THE 6-HEAD" || item.name === "DOKKAEBI"  || item.name === "EL CIPITÍO") {
                 member +=
                     '<li class="size-0">' +
                     '<span>' + item.size.toUpperCase() + '</span>' +
@@ -374,6 +401,14 @@ function placeOrder() {
                 case ("THE 6-HEAD"):
                     page = "six-head.html";
                     image = "six-h-front.png";
+                    break;
+                case ("DOKKAEBI"):
+                    page = "dokkaebi.html";
+                    image = "dok-back.png";
+                    break;
+                case ("EL CIPITÍO"):
+                    page = "el-cipitio.html";
+                    image = "cipitio-back.png";
                     break;
                 default:
                     page = "six-head.html";
@@ -478,6 +513,12 @@ function getPanels() {
                 break;
             case ('THE 6-HEAD'):
                 panels = panelImages[8];
+                break;
+            case ('DOKKAEBI'):
+                panels = panelImages[9];
+                break;
+            case ('EL CIPITÍO'):
+                panels = panelImages[10];
                 break;
             default:
                 panels = [];
@@ -729,6 +770,12 @@ $(document).ready(function () {
                 addItem("THE BIG-HEAD", 35);
                 break;
             case "six-head-atc":
+                break;
+            case "dokkaebi-atc":
+                addItem("DOKKAEBI", 25);
+                break;
+            case "cipitio-atc":
+                addItem("EL CIPITÍO", 25);
                 break;
         }
         $(".go-to-cart").css("display", "block");
