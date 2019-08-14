@@ -86,7 +86,7 @@ function sass() {
 
   const postCssPlugins = [
     // Autoprefixer
-    autoprefixer({ browsers: COMPATIBILITY }),
+    autoprefixer(),
 
     // UnCSS - Uncomment to remove unused styles in production
     // PRODUCTION && uncss.postcssPlugin(UNCSS_OPTIONS),
@@ -152,7 +152,7 @@ function images() {
 function server(done) {
   browser.init({
     //server: PATHS.dist, port: PORT
-    proxy: "http://localhost/All_Mankind/dist/"  
+    proxy: "http://localhost:8080/All-Mankind/dist/"  
   }); 
   done();
 }

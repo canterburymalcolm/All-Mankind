@@ -129,6 +129,14 @@ panelImages.push([
     "products/elCipitio/cipitio-squat.jpg"
 ]);
 
+panelImages.push([
+    "products/zoohill/zoo-back.png",
+    "products/zoohill/zoo-front.png",
+    "products/zoohill/zoo-pair.jpg",
+    "products/zoohill/zoo-stare.jpg",
+    "products/zoohill/zoo-rock.jpg",
+]);
+
 function Item(name, size, color, quantity, price, total) {
     this.name = name;
     this.size = size;
@@ -273,6 +281,10 @@ function placeCart() {
                     page = "el-cipitio.html";
                     image = "cipitio-back.png";
                     break;
+                case ("AMIS X ZOOHILL"):
+                    page = "zoohill.html";
+                    image = "zoo-back.png";
+                    break;
                 default:
                     page = "six-head.html";
                     image = "six-h-front.png";
@@ -293,18 +305,8 @@ function placeCart() {
                 '<div class="cart-member-menus">' +
                 '<ul class="dropdown-menu">';
 
-            if (item.name != "FISH HEADS" && item.name != "THE 6-HEAD" && item.name != "THE JOHN") {
-                member +=
-                    '<li class="size-0">' +
-                    '<span>' + item.size.toUpperCase() + '</span>' +
-                    '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
-                    '<ul class="sub-menu size-menu">' +
-                    '<li class="size-1"><span>SMALL</span></li>' +
-                    '<li class="size-2"><span>MEDIUM</span></li>' +
-                    '<li class="size-3"><span>LARGE</span></li>' +
-                    '</ul>' +
-                    '</li>';
-            } else if (item.name === "THE 6-HEAD" || item.name === "DOKKAEBI"  || item.name === "EL CIPITÍO") {
+            if (item.name === "THE 6-HEAD" || item.name === "DOKKAEBI"
+                || item.name === "EL CIPITÍO" || item.name === "AMIS X ZOOHILL") {
                 member +=
                     '<li class="size-0">' +
                     '<span>' + item.size.toUpperCase() + '</span>' +
@@ -317,17 +319,29 @@ function placeCart() {
                     '</ul>' +
                     '</li>';
 
-            } else if (item.name === "THE JOHN") {
+            } else if (item.name === "THE BIG-HEAD") {
                 member +=
                     '<li class="size-0">' +
                     '<span>' + item.size.toUpperCase() + '</span>' +
                     '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
                     '<ul class="sub-menu size-menu">' +
                     '<li class="size-1"><span>SMALL</span></li>' +
+                    '<li class="size-1"><span>MEDIUM</span></li>' +
                     '</ul>' +
                     '</li>';
-
+            } else {
+                member +=
+                    '<li class="size-0">' +
+                    '<span>' + item.size.toUpperCase() + '</span>' +
+                    '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
+                    '<ul class="sub-menu size-menu">' +
+                    '<li class="size-1"><span>SMALL</span></li>' +
+                    '<li class="size-2"><span>MEDIUM</span></li>' +
+                    '<li class="size-3"><span>LARGE</span></li>' +
+                    '</ul>' +
+                    '</li>';
             }
+
             member +=
                 '<li class="quantity-num">' +
                 '<span>QUANTITY: ' + item.quantity + '</span>' +
@@ -409,6 +423,10 @@ function placeOrder() {
                 case ("EL CIPITÍO"):
                     page = "el-cipitio.html";
                     image = "cipitio-back.png";
+                    break;
+                case ("AMIS X ZOOHILL"):
+                    page = "zoohill.html";
+                    image = "zoo-back.png";
                     break;
                 default:
                     page = "six-head.html";
@@ -519,6 +537,9 @@ function getPanels() {
                 break;
             case ('EL CIPITÍO'):
                 panels = panelImages[10];
+                break;
+            case ('AMIS X ZOOHILL'):
+                panels = panelImages[11];
                 break;
             default:
                 panels = [];
@@ -684,7 +705,7 @@ $(document).ready(function () {
     // });
 
     //link from store to individual product pages
-    $(".product").click(function () {
+    $(".product-container").click(function () {
         window.location.href = $(this).find("a").attr("href");
     })
 
@@ -747,29 +768,23 @@ $(document).ready(function () {
 
     //add curItem to cart
     $(".add-to-cart .button").click(function () {
+        let toCart = "block";
         switch ($(this).attr("id")) {
-            case "the-malcolm-atc":
-                break;
             case "thumb-up-atc":
                 if (curItem.color === "") {
                     curItem.color = "blue";
                 }
                 addItem("THUMB UP", 30);
                 break;
-            case "the-john-atc":
-                if (curItem.size === 'small') {
-                    addItem("THE JOHN", 50);
-                }
-                break;
             case "fish-heads-atc":
                 addItem("FISH HEADS", 12);
                 break;
-            case "the-malcolmII-atc":
-                break;
             case "big-head-atc":
-                addItem("THE BIG-HEAD", 35);
-                break;
-            case "six-head-atc":
+                if (curItem.size !== 'large') {
+                    addItem("THE BIG-HEAD", 35);
+                } else {
+                    toCart = "none";
+                }
                 break;
             case "dokkaebi-atc":
                 addItem("DOKKAEBI", 25);
@@ -777,8 +792,14 @@ $(document).ready(function () {
             case "cipitio-atc":
                 addItem("EL CIPITÍO", 25);
                 break;
+            case "zoohill-atc":
+                addItem("AMIS X ZOOHILL", 25);
+                break;
+            default:
+                toCart = "none";
+                break;
         }
-        $(".go-to-cart").css("display", "block");
+        $(".go-to-cart").css("display", toCart);
     })
 
     if (numItems > 0) {
@@ -889,7 +910,6 @@ $(document).ready(function () {
     if ($(".cart").length > 0) {
         var handler = StripeCheckout.configure({
             key: 'pk_test_3oUad6Xkn77ClYtyKHzDMljn',
-            //key: 'pk_live_m3BziyPDM16OwiITbfsy6kCr',
             image: 'https://allmankindisstupid.com/assets/img/icons/boyHead.png',
             description: describeCart(),
             locale: 'auto',
