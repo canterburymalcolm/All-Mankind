@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import Layout from '../components/MyLayout';
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+import { withApolloClient } from '../lib/with-apollo-client';
 import Link from 'next/link';
 
-export const TEST_QUERY = gql`
-  query getPrimaryShop {
+export const GET_PRIMARY_SHOP= gql` 
+  query PrimaryShop {
     primaryShop {
       _id
       name
@@ -12,24 +12,22 @@ export const TEST_QUERY = gql`
   }
 `;
 
-// const ProductLink = props => (
-//   <li>
-//     <Link href="/p/[id]" as={`/p/${props.id}`}>
-//       <a>{props.id}</a>
-//     </Link>
-//   </li>
-// );
-
-export default function Blog() {
-  // const { loading, error, data } = useQuery(TEST_QUERY);
-
-  // if (loading) return <p>Loading</p>;
-  // if (error) return <p>ERROR</p>;
-
-  //console.log(data);
-
+function IndexPage () {
+  const { data, loading, error } = useQuery(GET_PRIMARY_SHOP);
+  if (loading)  return <h1>Loading Query...</h1>;
+  if (error) return <h1>ERROR: {error.message}</h1>
+  const { _id, name } = data.primaryShop;
   return (
-      <h1>Querying Data</h1>
-  );
+    <div>
+      <h1>Retrieved Data</h1>
+      <p>ID: {_id}</p>
+      <p>Name: {name}</p>
+      <Link href="/shop/[pageData]" as={`/shop/1`}>
+        <a>Shop</a>
+      </Link>
+    </div>
+
+  )
 }
 
+export default withApolloClient(IndexPage);
