@@ -10,8 +10,12 @@ export class Product {
     this.colors = colors;
   }
 
-  get photo(){
+  get photo() {
     this.album.mainPhoto;
+  }
+
+  placeAlbum() {
+    this.album.place();
   }
 
   changeColor(old, current) {
@@ -24,14 +28,13 @@ export class Product {
   }
 }
 
-export const getProductByName = name => {
+export function getProductByName(name) {
   products.forEach(product => {
     if (product.name === name) {
       return product;
     }
   });
 }
-
 
 const products = [
   new Product("THE JOHN", [], 50, "the-john",

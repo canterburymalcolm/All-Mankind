@@ -1,5 +1,5 @@
 import { COLOR } from 'constants';
-import { this.product = getProductByName } from 'Product';
+import { getProductByName } from 'Product';
 
 export class Item {
   constructor(product, size, color, quantity) {
@@ -39,6 +39,12 @@ export class Item {
         break;
     }
     $(btn).css("background-color", this.color.code);
+  }
+
+  loadProduct() {
+      if (name) {
+        this.product = getProductByName(name);
+      }
   }
 
   isValid(atc) {

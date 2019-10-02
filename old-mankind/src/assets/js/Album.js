@@ -2,6 +2,62 @@ export class Album {
   constructor(panels, selected = 0) {
     this.panels = panels;
     this.selected = selected;
+
+    shiftPanels = this.shiftPanels.bind(this);
+  }
+
+  get mainPhoto() {
+    return this.panels[0];
+  }
+
+  place() {
+    const album = this;
+
+    //switch to panel image on click
+    $(".panels").on('click', '.panel-img', () => {
+      switch ($(this)[0]) {
+        case ($('.panel-img:nth-of-type(2)')[0]):
+          album.selected = 0;
+          break;
+        case ($('.panel-img:nth-of-type(3)')[0]):
+          album.selected = 1;
+          break;
+        case ($('.panel-img:nth-of-type(4)')[0]):
+          album.selected = 2;
+          break;
+        default:
+          album.selected = 3;
+          break;
+      }
+
+      $(".panel-img").addClass("opaque");
+      $(this).removeClass("opaque");
+      $(".main-img").find('img').attr("src", $(this).find('img').attr("src"));
+    });
+
+    //move panels when the panel arrows are clicked
+    $('.panel-arrow').click(() => {
+      if ($(this).hasClass("r-arrow")) {
+        album.shiftPanels(false);
+      } else {
+        album.shiftPanels(true);
+      }
+    });
+
+    //move main image when main arrows are clicked
+    $('.main-arrow').click(() => {
+      if ($(this).find('.main-right').length > 0) {
+        album.shiftMainImage(true);
+      } else {
+        album.shiftMainImage(false);
+      }
+    });
+  }
+
+  onClick() {
+    let selected = 3;
+
+    this.selected = selected;
   }
 
   changeColor(regex, current) {
