@@ -147,6 +147,26 @@ panelImages.push([
   "products/censored/cen-fall.jpg",
 ]);
 
+panelImages.push([
+  "products/gimp/gimp-close.png",
+  "products/gimp/gimp-front.png",
+  "products/gimp/gimp-pole.jpg",
+  "products/gimp/gimp-stand.jpg",
+  "products/gimp/gimp-flat.jpg",
+  "products/gimp/gimp-bike.jpg",
+  "products/gimp/gimp-hold.jpg",
+]);
+
+panelImages.push([
+  "products/sage/sage-back.png",
+  "products/sage/sage-front.png",
+  "products/sage/sage-alley.jpg",
+  "products/sage/sage-head.jpg",
+  "products/sage/sage-rail.jpg",
+  "products/sage/sage-squat.jpg",
+  "products/sage/sage-grass.jpg",
+]);
+
 function Item(name, size, color, quantity, price, total) {
   this.name = name;
   this.size = size;
@@ -299,6 +319,14 @@ function placeCart() {
           page = "censored.html";
           image = "cen-front.png";
           break;
+        case ("EMOTIONAL SUPPORT ANIMAL"):
+          page = "gimp.html";
+          image = "gimp-front.png";
+          break;
+        case ("THE SAGE"):
+          page = "sage.html";
+          image = "sage-back.png";
+          break;
         default:
           page = "six-head.html";
           image = "six-h-front.png";
@@ -319,8 +347,7 @@ function placeCart() {
         '<div class="cart-member-menus">' +
         '<ul class="dropdown-menu">';
 
-      if (item.name === "THE 6-HEAD" || item.name === "DOKKAEBI"
-        || item.name === "EL CIPITÍO") {
+      if (item.name === "THE SAGE") {
         member +=
           '<li class="size-0">' +
           '<span>' + item.size.toUpperCase() + '</span>' +
@@ -332,7 +359,28 @@ function placeCart() {
           '<li class="size-3"><span>XL</span></li>' +
           '</ul>' +
           '</li>';
-
+      } else if (item.name === "DOKKAEBI" || item.name === "EMOTIONAL SUPPORT ANIMAL") {
+        member +=
+          '<li class="size-0">' +
+          '<span>' + item.size.toUpperCase() + '</span>' +
+          '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
+          '<ul class="sub-menu size-menu">' +
+          '<li class="size-2"><span>MEDIUM</span></li>' +
+          '<li class="size-3"><span>LARGE</span></li>' +
+          '<li class="size-3"><span>XL</span></li>' +
+          '</ul>' +
+          '</li>';
+      } else if (item.name === "EL CIPITÍO") {
+        member +=
+          '<li class="size-0">' +
+          '<span>' + item.size.toUpperCase() + '</span>' +
+          '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
+          '<ul class="sub-menu size-menu">' +
+          '<li class="size-1"><span>SMALL</span></li>' +
+          '<li class="size-3"><span>LARGE</span></li>' +
+          '<li class="size-3"><span>XL</span></li>' +
+          '</ul>' +
+          '</li>';
       } else if (item.name === "THE BIG-HEAD") {
         member +=
           '<li class="size-0">' +
@@ -343,13 +391,13 @@ function placeCart() {
           '<li class="size-1"><span>MEDIUM</span></li>' +
           '</ul>' +
           '</li>';
-      } else if (item.name === "AMIS X ZOOHILL" || item.name === "CENSORED SHIRT") {
+        } else if (item.name === "AMIS X ZOOHILL") {
         member +=
           '<li class="size-0">' +
           '<span>' + item.size.toUpperCase() + '</span>' +
           '<img class="arrow" src="assets/img/cart/arrow-black.png">' +
           '<ul class="sub-menu size-menu">' +
-          '<li class="size-3"><span>XL</span></li>' +
+          '<li class="size-1"><span>MEDIUM</span></li>' +
           '</ul>' +
           '</li>';
       } else {
@@ -454,6 +502,14 @@ function placeOrder() {
         case ("CENSORED SHIRT"):
           page = "censored.html";
           image = "cen-front.png";
+          break;
+        case ("EMOTIONAL SUPPORT ANIMAL"):
+          page = "gimp.html";
+          image = "gimp-front.png";
+          break;
+        case ("THE SAGE"):
+          page = "sage.html";
+          image = "sage-back.png";
           break;
         default:
           page = "six-head.html";
@@ -570,6 +626,12 @@ function getPanels() {
         break;
       case ('CENSORED SHIRT'):
         panels = panelImages[12];
+        break;
+      case ("EMOTIONAL SUPPORT ANIMAL"):
+        panels = panelImages[13];
+        break;
+      case ('THE SAGE'):
+        panels = panelImages[14];
         break;
       default:
         panels = [];
@@ -810,31 +872,42 @@ $(document).ready(function () {
         addItem("FISH HEADS", 12);
         break;
       case "big-head-atc":
-        if (curItem.size !== 'large') {
+        if (curItem.size === 'small' || curItem.size === 'medium') {
           addItem("THE BIG-HEAD", 35);
         } else {
           toCart = "none";
         }
         break;
       case "dokkaebi-atc":
-        addItem("DOKKAEBI", 25);
+        if (curItem.size === 'small') {
+          toCart = "none";
+        } else {
+          addItem("DOKKAEBI", 25);
+        }
         break;
       case "cipitio-atc":
-        addItem("EL CIPITÍO", 25);
+        if (curItem.size !== 'medium') {
+          addItem("EL CIPITÍO", 25);
+        } else {
+          toCart = "none";
+        }
         break;
       case "zoohill-atc":
-        if (curItem.size === 'x-large') {
+        if (curItem.size === 'medium') {
           addItem("AMIS X ZOOHILL", 25);
         } else {
           toCart = "none";
         }
         break;
-      case "censored-atc":
-        if (curItem.size === 'x-large') {
-          addItem("CENSORED SHIRT", 25);
+     case "gimp-atc":
+        if (curItem.size !== 'small') {
+          addItem("EMOTIONAL SUPPORT ANIMAL", 30);
         } else {
           toCart = "none";
         }
+        break;
+      case "sage-atc":
+        addItem("THE SAGE", 50);
         break;
       default:
         toCart = "none";
@@ -1074,7 +1147,7 @@ $(document).ready(function () {
   });
 });
 
-//wait for all elements of product page to load before 
+//wait for all elements of product page to load before
 //placing the teeth in the middle of the listing div and making them visible
 $(window).on("load", function () {
   $(".listing").each(function () {
