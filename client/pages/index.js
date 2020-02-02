@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import withApollo from '../lib/with-apollo';
 
 const QUERY = gql`
-  query ProductList() {
+  query ProductList {
     inventory {
       id
     }
