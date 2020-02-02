@@ -1,6 +1,9 @@
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import withApollo from '../lib/with-apollo';
+import Link from 'next/link';
+import { LANDING_COPY } from '../constants';
+import styles from '../styles/landing.scss';
 
 const QUERY = gql`
   query ProductList {
@@ -11,12 +14,30 @@ const QUERY = gql`
 `;
 
 const Index = () => {
-  const { loading, data } = useQuery(QUERY);
-
-  if (loading || !data) {
-    return <h1>Loading...</h1>
-  }
-  return <h1>{data}</h1>
+  return (
+    <div className='landing'>
+      <div className={styles.landingBody}>
+        <p className={styles.text}>
+          <Link href='/'>
+            <a>all mankind is stupid</a>
+          </Link>
+          {LANDING_COPY[0]}
+          <Link href='/store'>
+            <a>store</a>
+          </Link>
+          {LANDING_COPY[1]}
+          <Link href='/lookbook'>
+            <a>lookbook</a>
+          </Link>
+          {LANDING_COPY[2]}
+          <Link href='/extras'>
+            <a>extras</a>
+          </Link>
+          {LANDING_COPY[3]}
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default withApollo(Index);

@@ -1,0 +1,10 @@
+$font-size: 20px;
+$line-height: 24px;
+
+@mixin text {
+    font: normal #{$font-size}/$line-height 'Helvetica Neue', sans-serif;
+}
+
+@mixin link {
+    text-decoration: none;
+}

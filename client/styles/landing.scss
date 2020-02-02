@@ -1,0 +1,18 @@
+@import "./utils";
+
+$link-color: #FF0000;
+
+.landingBody {
+    padding: 20px 40px;
+
+    color: white;
+    background-color: black;
+    p {
+        @include text;
+        a {
+            @include link;
+            color: $link-color;
+        }
+    }
+    
+}
