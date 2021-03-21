@@ -1,0 +1,4 @@
+#PHP able to run in .html
+AddType application/x-httpd-php .php .htm .html
+#RewriteEngine on
+#RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
