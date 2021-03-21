@@ -1,0 +1,146 @@
+
+<!doctype html>
+<html class="no-js fullHeight" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no">
+    <title>All Mankind</title>
+    <link rel="icon" href="assets/img/icons/pigHead.png">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli:700|Pragati+Narrow:700" rel="stylesheet">
+</head>
+
+<body class="fullHeight">
+
+    <div class="wrapper">
+        <div class="icons grid-x grid-margin-x align-center">
+            <div class="cell small-2">
+                <img id="hamburger-closed" src="assets/img/icons/ham-closed.png">
+                <img id="hamburger-open" src="assets/img/icons/ham-open.png">
+            </div>
+            <div class="cell small-8 large-shrink">
+                <a id="title" href="store.html">
+                    <img id="title-img" src="assets/img/icons/titleBubble.png?0001">
+                </a>
+            </div>
+            <div class="cell small-2">
+                <span class="cart-num">10</span>
+                <a id="cart" href="cart.html">
+                    <img id="cart-img" src="assets/img/icons/cartnobubble.png">
+                </a>
+            </div>
+        </div>
+
+        <div class="grid-x grid-margin-x align-center">
+            <div class="hamburger cell small-10" style="display: none">
+                <img src="assets/img/icons/linksbubble.png">
+                <a id="store" href="store.html"></a>
+                <a id="extras" href="extras.html"></a>
+                <a id="contact" href="contact.html"></a>
+                <a id="lookbook" href="lookbook.html"></a>
+                <a id="exit" href="#"></a>
+            </div>
+        </div>
+
+        <div class="navbar grid-x align-center">
+            <div class="cell large-shrink">
+                <a id="navStore" href="store.html">STORE</a>
+            </div>
+            <div class="cell large-shrink">
+                <a id="navExtras" href="extras.html">EXTRAS</a>
+            </div>
+            <div class="cell large-shrink">
+                <a id="navLook" href="lookbook.html">LOOKBOOK</a>
+            </div>
+            <div class="cell large-shrink">
+                <a id="navContact" href="contact.html">CONTACT</a>
+            </div>
+        </div>
+
+        <!-- ---
+        layout: checkout-layout
+        ---
+        
+        <div id="main" class="loading">
+            <div class="heading grid-x align-center">
+                <div class="home cell small-8">
+                    <a href="shop.html">
+                        <img src="assets/img/icons/titleBubble.png">
+                    </a>
+                </div>
+            </div>
+        
+            <div class="checkout grid-x grid-margin-x align-center">
+                <div class="cell small-8">
+                    <div id="payment-request">
+                        <div id="payment-request-button"></div>
+                    </div>
+                </div>
+        
+                <div class="cell small-8">
+                    <form id="payment-form" method="POST" action="/orders">
+                        <p class="instruction">shipping and payment info</p>
+                        <section>
+                            <h2>Shipping &amp; Billing Information</h2>
+                            <fieldset class="with-state">
+                                <label>
+                                    <span>Name</span>
+                                    <input name="name" class="field" required>
+                                </label>
+                                <label>
+                                    <span>Email</span>
+                                    <input name="email" type="email" class="field" required>
+                                </label>
+                                <label>
+                                    <span>Address</span>
+                                    <input name="address" class="field" required>
+                                </label>
+                                <label>
+                                    <span>City</span>
+                                    <input name="city" class="field" required>
+                                </label>
+                                <label class="state">
+                                    <span>State</span>
+                                    <input name="state" class="field" required>
+                                </label>
+                                <label class="zip">
+                                    <span>ZIP</span>
+                                    <input name="postal_code" class="field" required>
+                                </label>
+                                <label class="select">
+                                    <span>Country</span>
+                                    <div id="country" class="field US">
+                                        <select name="country">
+                                            <option value="AU">Australia</option>
+                                            <option value="AT">Austria</option>
+                                            <option value="US" selected="selected">United States</option>
+                                        </select>
+                                    </div>
+                                </label>
+                            </fieldset>
+                        </section>
+                        <section>
+                            <h2>Payment Information</h2>
+                            <div class="payment-info card visible">
+                                <fieldset>
+                                    <label>
+                                        <span>Card</span>
+                                        <div id="card-element" class="field"></div>
+                                    </label>
+                                </fieldset>
+                            </div>
+                        </section>
+                        <button type="submit">Pay</button>
+                    </form>
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

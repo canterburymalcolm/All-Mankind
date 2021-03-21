@@ -48,7 +48,7 @@ function clean(done) {
 // This task skips over the "img", "js", and "scss" folders, which are parsed separately
 function copy() {
   gulp.src('src/.htaccess')
-    .pipe(gulp.dest('dist/'))
+    .pipe(gulp.dest(`${PATHS.dist}/`))
   return gulp.src(PATHS.assets)
     .pipe(gulp.dest(PATHS.dist + '/assets'));
 }
@@ -135,7 +135,7 @@ function javascript() {
       .on('error', e => { console.log(e); })
     ))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
-    .pipe(gulp.dest('dist/assets/js'));
+    .pipe(gulp.dest(`${PATHS.dist}/assets/js`));
 }
 
 // Copy images to the "dist" folder
@@ -145,7 +145,7 @@ function images() {
     .pipe($.if(PRODUCTION, $.imagemin([
       $.imagemin.mozjpeg({ progressive: true }),
     ])))
-    .pipe(gulp.dest('dist/assets/img'));
+    .pipe(gulp.dest(`${PATHS.dist}/assets/img`));
 }
 
 // Start a server with BrowserSync to preview the site in

@@ -11,7 +11,8 @@ COMPATIBILITY:
 UNCSS_OPTIONS:
   html:
     # Search for used CSS classes in generated HTML files
-    - "dist/**/*.html"
+    # - "dist/**/*.html"
+    - "docs/**/*.html"
   ignore:
     - !!js/regexp .foundation-mq
     - !!js/regexp ^\.is-.*
@@ -19,7 +20,7 @@ UNCSS_OPTIONS:
 # Gulp will reference these paths when it copies files
 PATHS:
   # Path to dist folder
-  dist: "dist"
+  dist: "docs"
   # Paths to static assets that aren't images, CSS, or JavaScript
   assets:
     - "src/assets/**/*"
